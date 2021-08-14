@@ -4,7 +4,7 @@ output
 Read things from DAKOTA output files
 """
 import pandas as pd
-import utils
+from . import utils
 
 
 PPCC = "pearson"
