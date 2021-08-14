@@ -1,0 +1,11 @@
+# Requirements without versions
+sphinx_rtd_theme
+pytest
+numpydoc
+
+# Requirements with minor version numbers
+sphinx >= 3.0
+
+# Requirements with major version numbers
+pandas >= 1
+
