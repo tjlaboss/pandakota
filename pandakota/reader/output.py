@@ -9,10 +9,14 @@ from . import utils
 
 PPCC = "pearson"
 SPRCC = "spearman"
+MS = "statistics"
+CI = "confidence"
 
 NAMES = {
 	PPCC: "Partial Correlation Coefficient",
 	SPRCC: "Partial Rank Correlation Coefficient",
+	MS: "Sample moment statistics",
+	CI: "95% confidence intervals"
 }
 
 
@@ -68,6 +72,11 @@ def read_spearman_matrix(text, autosnip=True):
 	----------
 	text: str
 		Text containing the partial matrix
+	
+	autosnip: bool; optional
+		Whether to detect the start and end of the
+		partial correlation matrix block using pandakota defaults.
+		[Default: True]
 
 	Returns:
 	--------
@@ -79,7 +88,55 @@ def read_spearman_matrix(text, autosnip=True):
 	return read_partial_matrix(text)
 
 
+def read_moment_statistics(text, autosnip=True):
+	"""Read the sample moment statistics
+
+	Parameter:
+	----------
+	text: str
+		Text containing the moment statistics
+
+	autosnip: bool; optional
+		Whether to detect the start and end of the
+		moment statistics block using pandakota defaults.
+		[Default: True]
+
+	Returns:
+	--------
+	pd.DataFrame
+		DF of Mean, Std Dev, Skewness, Kurtosis
+	"""
+	if autosnip:
+		text = utils.snip_text(text, start=NAMES[MS])
+	return read_partial_matrix(text).T
+
+
+def read_confidence_intervals(text, autosnip=True):
+	"""Read the 95-95 confidence intervals
+
+	Parameter:
+	----------
+	text: str
+		Text containing the 95% confidence intervals
+
+	autosnip: bool; optional
+		Whether to detect the start and end of the
+		confidence intervals block using pandakota defaults.
+		[Default: True]
+
+	Returns:
+	--------
+	pd.DataFrame
+		DF of LowerCI_Mean, UpperCI_Mean, LowerCI_StdDev, UpperCI_StdDev
+	"""
+	if autosnip:
+		text = utils.snip_text(text, start=NAMES[CI])
+	return read_partial_matrix(text).T
+
+
 READERS = {
 	PPCC:  read_pearson_matrix,
 	SPRCC: read_spearman_matrix,
+	MS:    read_moment_statistics,
+	CI:    read_confidence_intervals,
 }
