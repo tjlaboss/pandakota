@@ -13,8 +13,8 @@ MS = "statistics"
 CI = "confidence"
 
 NAMES = {
-	PPCC: "Partial Correlation Coefficient",
-	SPRCC: "Partial Rank Correlation Coefficient",
+	PPCC: "Partial Correlation Matrix",
+	SPRCC: "Partial Rank Correlation Matrix",
 	MS: "Sample moment statistics",
 	CI: "95% confidence intervals"
 }
@@ -62,7 +62,7 @@ def read_pearson_matrix(text, autosnip=True):
 	"""
 	if autosnip:
 		text = utils.snip_text(text, start=NAMES[PPCC])
-	return read_partial_matrix(text)
+	return read_partial_matrix(text).T
 
 
 def read_spearman_matrix(text, autosnip=True):
@@ -85,7 +85,7 @@ def read_spearman_matrix(text, autosnip=True):
 	"""
 	if autosnip:
 		text = utils.snip_text(text, start=NAMES[SPRCC])
-	return read_partial_matrix(text)
+	return read_partial_matrix(text).T
 
 
 def read_moment_statistics(text, autosnip=True):
@@ -108,7 +108,7 @@ def read_moment_statistics(text, autosnip=True):
 	"""
 	if autosnip:
 		text = utils.snip_text(text, start=NAMES[MS])
-	return read_partial_matrix(text).T
+	return read_partial_matrix(text)
 
 
 def read_confidence_intervals(text, autosnip=True):
@@ -131,7 +131,7 @@ def read_confidence_intervals(text, autosnip=True):
 	"""
 	if autosnip:
 		text = utils.snip_text(text, start=NAMES[CI])
-	return read_partial_matrix(text).T
+	return read_partial_matrix(text)
 
 
 READERS = {
