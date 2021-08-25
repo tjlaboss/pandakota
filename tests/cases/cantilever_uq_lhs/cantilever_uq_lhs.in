@@ -1,0 +1,38 @@
+# Cantilever LHS problem from DAKOTA examples
+
+environment
+    tabular_data
+
+method
+  sampling
+    sample_type lhs
+    seed = 52983
+    samples = 600
+    num_probability_levels = 0 17 17
+    probability_levels =
+      .001 .01 .05 .1 .15 .2 .3 .4 .5 .6 .7 .8 .85 .9 .95 .99 .999
+      .001 .01 .05 .1 .15 .2 .3 .4 .5 .6 .7 .8 .85 .9 .95 .99 .999
+    cumulative distribution
+
+model
+  single
+
+variables
+  active uncertain
+  continuous_design = 2
+    initial_point    2.5    2.5
+    descriptors      'w'    't'
+  normal_uncertain = 4
+    means             =  40000. 29.E+6  500. 1000.
+    std_deviations    =  2000.  1.45E+6 100. 100.
+    descriptors       =  'R'    'E'     'X'  'Y'
+
+interface
+  direct
+    analysis_driver = 'mod_cantilever'
+
+responses
+  response_functions = 3
+  descriptors = 'area' 'stress' 'displacement'
+  no_gradients
+  no_hessians
