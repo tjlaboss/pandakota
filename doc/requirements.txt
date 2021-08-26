@@ -1,0 +1,6 @@
+# Requirements for documentation
+sphinx_rtd_theme
+pytest
+numpydoc
+sphinx >= 3.0
+pandas >= 1
