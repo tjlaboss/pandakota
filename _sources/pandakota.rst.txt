@@ -1,0 +1,18 @@
+pandakota package
+=================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   pandakota.reader
+
+Module contents
+---------------
+
+.. automodule:: pandakota
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+pandakota.reader.utils module
+=============================
+
+.. automodule:: pandakota.reader.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

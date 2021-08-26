@@ -1,0 +1,7 @@
+pandakota
+=========
+
+.. toctree::
+   :maxdepth: 4
+
+   pandakota
