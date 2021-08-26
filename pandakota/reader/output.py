@@ -104,10 +104,11 @@ def read_moment_statistics(text, autosnip=True):
 	Returns:
 	--------
 	pd.DataFrame
-		DF of Mean, Std Dev, Skewness, Kurtosis
+		DF of Mean, StdDev, Skewness, Kurtosis
 	"""
 	if autosnip:
 		text = utils.snip_text(text, start=NAMES[MS])
+	text = text.replace("Std Dev", "StdDev")
 	return read_partial_matrix(text)
 
 
