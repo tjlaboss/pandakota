@@ -9,9 +9,11 @@ def compare_dfs(df1: pd.DataFrame, df2: pd.DataFrame, ignore_index=False, **kwar
 	if "equal_nan" not in kwargs:
 		kwargs["equal_nan"] = True
 	if df1.shape != df2.shape:
-		return 3, f"DF shapes are unequal: {df1.shape} != {df2.shape}"
-	if not ignore_index and (any(df1.index != df2.index) or any(df1.columns != df2.columns)):
-		return 2, "DF indices or columns are unequal."
+		return 4, f"DF shapes are unequal: {df1.shape} != {df2.shape}"
+	if not ignore_index and any(df1.columns != df2.columns):
+		return 3, f"DF columns are unequal: {df1.columns} != {df2.columns}"
+	if not ignore_index and any(df1.index != df2.index):
+		return 2, "DF indices are unequal."
 	df_equal = pd.DataFrame(np.isclose(df1, df2, **kwargs), index=df1.index, columns=df1.columns)
 	cols_equal = df_equal.all()
 	if cols_equal.all():
