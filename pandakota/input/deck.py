@@ -4,6 +4,8 @@ Deck
 Class for DAKOTA input decks
 """
 
+import pandakota.input.variables as v
+
 class Deck:
 	"""DAKOTA Input deck builder
 	
