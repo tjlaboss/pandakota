@@ -23,18 +23,10 @@ class Variable(abc.ABC):
 		self._dtype = dtype
 		self._element = None
 	
-	@property
 	@abc.abstractmethod
+	@property
 	def block_name(self) -> str:
 		pass
-	
-	@property
-	@abc.abstractmethod
-	def properties(self) -> typing.Dict:
-		pass
-	
-	def __len__(self):
-		return len(self.properties)
 	
 	@property
 	def dtype(self):
@@ -55,8 +47,20 @@ class Variable(abc.ABC):
 		self._element = e
 	
 	@abc.abstractmethod
-	def _get_strings(self) -> typing.Tuple[str]:
+	def _get_strings(self) -> typing.Dict[str]:
 		pass
+	
+	def justify(self) -> typing.Dict:
+		"""Align this variable's name and values nicely
+
+		Returns:
+		--------
+		dict
+			Dictionary of properties with the same lengths
+		"""
+		strings = self._get_strings()
+		length = 2 + max([len(s) for s in strings.values()])
+		return {k: s.ljust(length) for k, s in strings.items()}
 
 
 class StateVariable(Variable):
@@ -97,13 +101,14 @@ class StateVariable(Variable):
 		}
 		return propdict
 	
-	def _get_strings(self):
-		namestr = '"{}"'.format(self.key)
+	def _get_strings(self) -> typing.Dict:
+		propdict = {
+			"descriptors": f'"{self.key}"',
+			"elements": f' {self.element} '
+		}
 		if self.dtype is str:
-			elemstr = '"{}"'.format(self.element)
-		else:
-			elemstr = ' {} '.format(self.element)
-		return namestr, elemstr
+			propdict["elements"] = propdict["elements"].replace(' ', '"')
+		return propdict
 
 class NormalUncertainVariable(Variable):
 	"""DAKOTA input variable described by a normal distribution
@@ -133,20 +138,13 @@ class NormalUncertainVariable(Variable):
 	def block_name(self) -> str:
 		return "normal_uncertain"
 	
-	@property
-	def properties(self) -> typing.Dict:
+	def _get_strings(self) -> typing.Dict:
 		propdict = {
-			"descriptors"   : self.key,
-			"means"         : self.mean,
-			"std_deviations": self.std_dev
+			"descriptors"   : f'"{self.key}"',
+			"means"         : f' {self.mean} ',
+			"std_deviations": f' {self.std_dev} '
 		}
 		return propdict
-	
-	def _get_strings(self):
-		namestr = f'"{self.key}"'
-		meanstr = f' {self.mean} '
-		stdvstr = f' {self.std_dev} '
-		return namestr, meanstr, stdvstr
 
 
 class UniformUncertainVariable(Variable):
@@ -195,20 +193,20 @@ class UniformUncertainVariable(Variable):
 	def block_name(self) -> str:
 		return "uniform_uncertain"
 	
-	@property
-	def properties(self) -> typing.Dict:
-		propdict = {
-			"descriptors" : self.key,
-			"lower_bounds": self.lower,
-			"upper_bounds": self.upper
-		}
-		return propdict
-	
 	def __reset_element(self):
 		self.element = 0.5*(self.upper + self.lower)
 	
 	def _get_strings(self):
-		name_str = f'"{self.key}"'
-		lowerstr = f' {self.lower} '
-		upperstr = f' {self.upper} '
-		return name_str, lowerstr, upperstr
+		propdict = {
+			"descriptors" : f'"{self.key}"',
+			"lower_bounds": f' {self.lower} ',
+			"upper_bounds": f' {self.upper} '
+		}
+		return propdict
+
+
+TYPED_VARIABLES = {
+	StateVariable,
+	NormalUncertainVariable,
+	UniformUncertainVariable,
+}

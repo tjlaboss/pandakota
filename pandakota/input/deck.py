@@ -8,6 +8,7 @@ import typing
 import collections
 import pandakota.input.variables as v
 
+
 class Deck:
 	"""DAKOTA Input deck builder
 	
@@ -16,15 +17,11 @@ class Deck:
 	"""
 	def __init__(self):
 		self._all_variable_keys: typing.Set[str] = set()
-		self._state_variables: typing.Dict[str, v.StateVariable] = dict()
-		self._normal_uncertain_variables: typing.Dict[str, v.NormalUncertainVariable] = dict()
-		self._uniform_uncertain_variables: typing.Dict[str, v.UniformUncertainVariable] = dict()
-		# Register each variable type here.
-		self._chained_variables = collections.ChainMap(
-			self._state_variables,
-			self._normal_uncertain_variables,
-			self._state_variables
-		)
+		# self._state_variables: typing.Dict[str, v.StateVariable] = dict()
+		# self._normal_uncertain_variables: typing.Dict[str, v.NormalUncertainVariable] = dict()
+		# self._uniform_uncertain_variables: typing.Dict[str, v.UniformUncertainVariable] = dict()
+		self._typed_variables = {_t: typing.Dict[str, _t] for _t in v.TYPED_VARIABLES}
+		self._chained_variables = collections.ChainMap(*self._typed_variables.values())
 	
 	def __iter__(self):
 		return iter(self._all_variable_keys)
@@ -40,15 +37,15 @@ class Deck:
 	
 	@property
 	def state_variables(self):
-		return self._state_variables
+		return self._typed_variables[v.StateVariable]
 	
 	@property
 	def normal_uncertain_variables(self):
-		return self._normal_uncertain_variables
+		return self._typed_variables[v.NormalUncertainVariable]
 	
 	@property
 	def uniform_uncertain_variables(self):
-		return self._uniform_uncertain_variables
+		return self._typed_variables[v.UniformUncertainVariable]
 	
 	def _validate_descriptor(self, descriptor: str):
 		"""Make sure the variable name is unique, and add it to the registry"""
@@ -59,6 +56,11 @@ class Deck:
 		assert descriptor not in self._all_variable_keys, \
 			f"A variable with the name {descriptor} already exists."
 		self._all_variable_keys.add(descriptor)
+	
+	
+	def add_variable(self, var: v.Variable):
+		self._validate_descriptor(var.key)
+		self._typed_variables[type(var)][var.key] = var
 	
 	def add_normal_uncertain_variable(
 			self, descriptor: str, mean: float, std_deviation: float
@@ -76,9 +78,8 @@ class Deck:
 		std_deviation: float
 			Standard deviation of its uncertainty distribution
 		"""
-		self._validate_descriptor(descriptor)
 		ncv = v.NormalUncertainVariable(descriptor, mean, std_deviation)
-		self._normal_uncertain_variables[ncv.key] = ncv
+		self.add_variable(ncv)
 	
 	def add_uniform_uncertain_variable(
 			self, descriptor: str, lower_bound: float, upper_bound: float
@@ -96,7 +97,18 @@ class Deck:
 		upper_bound: float
 			Upper bound of its uncertainty distribution.
 		"""
-		self._validate_descriptor(descriptor)
 		ucv = v.UniformUncertainVariable(descriptor, lower_bound, upper_bound)
-		self._uniform_uncertain_variables[ucv.key] = ucv
+		self.add_variable(ucv)
 		
+	def _format_variable_type(self, VariableClass: typing.Type[v.Variable]) -> str:
+		# This won't work for state variables...
+		these_variables = self._typed_variables[VariableClass]
+		proplines = {}
+		for var in these_variables.values():
+			for prop, val in var.justify().items():
+				propline = proplines.get(prop, prop.ljust(16))
+				proplines[prop] = propline + val
+		header = f"\n\t{VariableClass.block_name}  {len(these_variables)}"
+		sep = "\n\t\t"
+		block = header + sep + sep.join(proplines.values()) + "\n"
+		return block
