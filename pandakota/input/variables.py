@@ -125,7 +125,7 @@ class UniformUncertainVariable(Variable):
 		Lower limit of the uniform distribution
 
 	"""
-	def __init__(self, key: str, lower: str, upper: str):
+	def __init__(self, key: str, lower: float, upper: float):
 		super().__init__(key, dtype=float)
 		self._lower = lower
 		self._upper = upper
