@@ -195,8 +195,8 @@ class UniformUncertainVariable(Variable):
 		return propdict
 
 
-TYPED_VARIABLES = {
+TYPED_VARIABLES = (
 	StateVariable,
 	NormalUncertainVariable,
 	UniformUncertainVariable,
-}
+)
