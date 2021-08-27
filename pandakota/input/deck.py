@@ -9,21 +9,16 @@ import collections
 import pandakota.input.variables as v
 
 
+_TV = typing.Dict[typing.Type[v.Variable], typing.Dict[str, v.Variable]]
+
 class Deck:
 	"""DAKOTA Input deck builder
 	
 	The duck-typed deck that quacks like a dict
 	
 	"""
-	
-	_TV = typing.Dict[typing.Type[v.Variable], typing.Dict[str, v.Variable]]
-	
-	
 	def __init__(self):
 		self._all_variable_keys: typing.Set[str] = set()
-		# self._state_variables: typing.Dict[str, v.StateVariable] = dict()
-		# self._normal_uncertain_variables: typing.Dict[str, v.NormalUncertainVariable] = dict()
-		# self._uniform_uncertain_variables: typing.Dict[str, v.UniformUncertainVariable] = dict()
 		self._typed_variables: _TV = {_t: dict() for _t in v.TYPED_VARIABLES}
 		self._chained_variables = collections.ChainMap(*self._typed_variables.values())
 	
@@ -122,7 +117,7 @@ class Deck:
 	
 	def _format_variables(self):
 		block = "variables\n"
-		for VariableClass in self._typed_variables:
+		for VariableClass in v.TYPED_VARIABLES:
 			block += self._format_variable_type(VariableClass)
 		return block
 
