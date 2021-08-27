@@ -22,7 +22,20 @@ class Variable(abc.ABC):
 		self.key = key  # TODO: ensure valid key names
 		self._dtype = dtype
 		self._element = None
-		
+	
+	@property
+	@abc.abstractmethod
+	def block_name(self) -> str:
+		pass
+	
+	@property
+	@abc.abstractmethod
+	def properties(self) -> typing.Dict:
+		pass
+	
+	def __len__(self):
+		return len(self.properties)
+	
 	@property
 	def dtype(self):
 		return self._dtype
@@ -71,6 +84,19 @@ class StateVariable(Variable):
 		"""Cast another variable as a StateVariable"""
 		return cls(other.key, other.dtype, other.element)
 	
+	@property
+	def block_name(self) -> str:
+		# Warning: state variables are formatted differently.
+		return "discrete_state_set"
+	
+	@property
+	def properties(self) -> typing.Dict:
+		propdict = {
+			"descriptors": self.key,
+			"elements": self.element
+		}
+		return propdict
+	
 	def _get_strings(self):
 		namestr = '"{}"'.format(self.key)
 		if self.dtype is str:
@@ -102,6 +128,19 @@ class NormalUncertainVariable(Variable):
 	@property
 	def mean(self):
 		return self.element
+	
+	@property
+	def block_name(self) -> str:
+		return "normal_uncertain"
+	
+	@property
+	def properties(self) -> typing.Dict:
+		propdict = {
+			"descriptors"   : self.key,
+			"means"         : self.mean,
+			"std_deviations": self.std_dev
+		}
+		return propdict
 	
 	def _get_strings(self):
 		namestr = f'"{self.key}"'
@@ -152,8 +191,21 @@ class UniformUncertainVariable(Variable):
 		self._upper = u
 		self.__reset_element()
 	
+	@property
+	def block_name(self) -> str:
+		return "uniform_uncertain"
+	
+	@property
+	def properties(self) -> typing.Dict:
+		propdict = {
+			"descriptors" : self.key,
+			"lower_bounds": self.lower,
+			"upper_bounds": self.upper
+		}
+		return propdict
+	
 	def __reset_element(self):
-		return 0.5*(self.upper + self.lower)
+		self.element = 0.5*(self.upper + self.lower)
 	
 	def _get_strings(self):
 		name_str = f'"{self.key}"'
