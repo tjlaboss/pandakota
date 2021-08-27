@@ -4,7 +4,7 @@ output
 Read things from DAKOTA output files
 """
 import pandas as pd
-from . import utils
+from pandakota.reader import utils
 
 
 PPCC = "pearson"

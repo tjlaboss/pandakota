@@ -1,1 +1,1 @@
-from . import reader
+import pandakota.reader
