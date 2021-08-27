@@ -116,13 +116,15 @@ class Deck:
 				proplines[prop] = propline + val
 		header = f"\n\t{VariableClass.block_name}  {len(these_variables)}"
 		sep = "\n\t\t"
-		block = header + sep + sep.join(proplines.values()) + "\n"
+		variables = sep.join([line.rstrip() for line in proplines.values()])
+		block = header + sep + variables + "\n"
 		return block
 	
 	def _format_variables(self):
 		block = "variables\n"
 		for VariableClass in self._typed_variables:
 			block += self._format_variable_type(VariableClass)
+		return block
 
 
 	def get_deck(self) -> str:

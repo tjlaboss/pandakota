@@ -18,15 +18,11 @@ class Variable(abc.ABC):
 	dtype: type
 		Required data type
 	"""
+	block_name = None
 	def __init__(self, key: str, dtype: type):
 		self.key = key  # TODO: ensure valid key names
 		self._dtype = dtype
 		self._element = None
-	
-	@property
-	@abc.abstractmethod
-	def block_name(self) -> str:
-		pass
 	
 	@property
 	def dtype(self):
@@ -125,6 +121,7 @@ class NormalUncertainVariable(Variable):
 		Standard deviation of the normal distribution
 
 	"""
+	block_name = "normal_uncertain"
 	def __init__(self, key: str, mean: float, std_dev: float):
 		super().__init__(key, dtype=float)
 		self.element = mean
@@ -133,10 +130,6 @@ class NormalUncertainVariable(Variable):
 	@property
 	def mean(self):
 		return self.element
-	
-	@property
-	def block_name(self) -> str:
-		return "normal_uncertain"
 	
 	def _get_strings(self) -> typing.Dict:
 		propdict = {
@@ -162,6 +155,7 @@ class UniformUncertainVariable(Variable):
 		Lower limit of the uniform distribution
 
 	"""
+	block_name = "uniform_uncertain"
 	def __init__(self, key: str, lower: float, upper: float):
 		super().__init__(key, dtype=float)
 		self._lower = lower
@@ -188,10 +182,6 @@ class UniformUncertainVariable(Variable):
 			raise ValueError(f"upper must be > lower ({self._lower}).")
 		self._upper = u
 		self.__reset_element()
-	
-	@property
-	def block_name(self) -> str:
-		return "uniform_uncertain"
 	
 	def __reset_element(self):
 		self.element = 0.5*(self.upper + self.lower)
