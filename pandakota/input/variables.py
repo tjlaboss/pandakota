@@ -23,8 +23,8 @@ class Variable(abc.ABC):
 		self._dtype = dtype
 		self._element = None
 	
-	@abc.abstractmethod
 	@property
+	@abc.abstractmethod
 	def block_name(self) -> str:
 		pass
 	
@@ -47,7 +47,7 @@ class Variable(abc.ABC):
 		self._element = e
 	
 	@abc.abstractmethod
-	def _get_strings(self) -> typing.Dict[str]:
+	def _get_strings(self) -> typing.Dict[str, str]:
 		pass
 	
 	def justify(self) -> typing.Dict:

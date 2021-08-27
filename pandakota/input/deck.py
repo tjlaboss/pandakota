@@ -15,12 +15,16 @@ class Deck:
 	The duck-typed deck that quacks like a dict
 	
 	"""
+	
+	_TV = typing.Dict[typing.Type[v.Variable], typing.Dict[str, v.Variable]]
+	
+	
 	def __init__(self):
 		self._all_variable_keys: typing.Set[str] = set()
 		# self._state_variables: typing.Dict[str, v.StateVariable] = dict()
 		# self._normal_uncertain_variables: typing.Dict[str, v.NormalUncertainVariable] = dict()
 		# self._uniform_uncertain_variables: typing.Dict[str, v.UniformUncertainVariable] = dict()
-		self._typed_variables = {_t: typing.Dict[str, _t] for _t in v.TYPED_VARIABLES}
+		self._typed_variables: _TV = {_t: dict() for _t in v.TYPED_VARIABLES}
 		self._chained_variables = collections.ChainMap(*self._typed_variables.values())
 	
 	def __iter__(self):
