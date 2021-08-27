@@ -103,6 +103,8 @@ class Deck:
 	def _format_variable_type(self, VariableClass: typing.Type[v.Variable]) -> str:
 		# This won't work for state variables...
 		these_variables = self._typed_variables[VariableClass]
+		if not these_variables:
+			return ""
 		proplines = {}
 		for var in these_variables.values():
 			for prop, val in var.justify().items():
@@ -112,3 +114,16 @@ class Deck:
 		sep = "\n\t\t"
 		block = header + sep + sep.join(proplines.values()) + "\n"
 		return block
+	
+	def _format_variables(self):
+		block = "variables\n"
+		for VariableClass in self._typed_variables:
+			block += self._format_variable_type(VariableClass)
+
+
+	def get_deck(self) -> str:
+		"""WORK IN PROGRESS"""
+		deck_text = "# Dakota Input File"
+		deck_text += "\n\n"
+		deck_text += self._format_variables()
+		return deck_text

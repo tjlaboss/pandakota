@@ -1,3 +1,3 @@
-import pandakota.input.deck
+from pandakota.input.deck import Deck
 import pandakota.input.variables
 
