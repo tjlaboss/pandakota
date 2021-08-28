@@ -75,14 +75,14 @@ class Study:
 		):
 			os.makedirs(folder, exist_ok=True)
 	
-	def _write_options_yaml(self, yaml_fname: names.config.options):
+	def _write_options_yaml(self, yaml_fname=names.config.options):
 		"""Write the options yaml, obtained from YAML"""
 		yaml_fpath = os.path.join(self._dakota_dir, yaml_fname)
 		with open(yaml_fpath, 'w') as fyaml:
 			fyaml.write(f"# Pandakota v{__version__} Options YAML\n")
 			fyaml.write(f"#    dumped by: {names.config.parser} v{yaml.__version__}\n\n")
 			yaml.dump(self._config, fyaml)
-		print("Options yaml written to: {}".format(yaml_fpath))
+		print(f"Options yaml written to: {yaml_fpath}")
 	
 	def _get_execlist(
 			self,
@@ -128,6 +128,8 @@ class Study:
 		with open(dakota_in, 'w') as f:
 			f.write(deck_text)
 		print(f"DAKOTA deck written to: {dakota_in}")
+		# Write the driver options.
+		self._write_options_yaml()
 		# Deal with dry run case
 		if dry:
 			exec_list = ["echo", "Dry Run: $"] + exec_list
