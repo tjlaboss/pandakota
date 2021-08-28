@@ -3,7 +3,7 @@
 import pandakota
 
 
-deck = pandakota.input.Deck()
+deck = pandakota.input.Deck(functions=['f'])
 n1 = pandakota.input.NormalUncertainVariable('nuv', 1.0, 0.05)
 n2 = pandakota.input.NormalUncertainVariable(
 	key='NormalVariable', mean=-1.234e6, std_dev=.00001
@@ -25,6 +25,14 @@ variables
 		descriptors     "u"
 		lower_bounds     -3.33
 		upper_bounds     0.33
+"""
+
+REF_RESPONSES = """\
+responses
+	objective_functions  1
+	descriptors          f
+	no_gradients
+	no_hessians
 """
 
 def test_variables():
@@ -57,3 +65,8 @@ def test_wrong_variable_type():
 def test_variable_generation():
 	assert deck._format_variables() == REF_VARIABLES, \
 		"Variable generation test failed."
+
+
+def test_response_generation():
+	assert deck._format_responses() == REF_RESPONSES, \
+		"Response function generation test failed."

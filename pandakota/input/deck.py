@@ -17,10 +17,14 @@ class Deck:
 	The duck-typed deck that quacks like a dict
 	
 	"""
-	def __init__(self):
+	def __init__(self, functions: typing.Iterable[str]):
 		self._all_variable_keys: typing.Set[str] = set()
 		self._typed_variables: _TV = {_t: dict() for _t in v.TYPED_VARIABLES}
 		self._chained_variables = collections.ChainMap(*self._typed_variables.values())
+		if isinstance(functions, str):
+			functions = [functions]
+		self.functions = functions
+		
 	
 	def __iter__(self):
 		return iter(self._all_variable_keys)
@@ -120,6 +124,27 @@ class Deck:
 		for VariableClass in v.TYPED_VARIABLES:
 			block += self._format_variable_type(VariableClass)
 		return block
+	
+	def _format_output_functions(self, function_key: str):
+		block = f"\n\t{function_key}  {len(self.functions)}"
+		sep = "  "
+		block += "\n\tdescriptors".ljust(len(function_key)) + sep
+		block += sep + sep.join(self.functions)
+		return block
+	
+	def _format_gradients(self):
+		return "\n\tno_gradients"
+	
+	def _format_hessians(self):
+		return "\n\tno_hessians"
+	
+	def _format_responses(self):
+		# TODO: Implement
+		block = "responses"
+		block += self._format_output_functions("objective_functions")  # TODO
+		block += self._format_gradients() + self._format_hessians() + "\n"
+		return block
+		
 
 
 	def get_deck(self) -> str:
