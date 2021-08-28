@@ -30,7 +30,7 @@ jobs:
   test:
     docker: &pydocker
       # - image: cimg/python:3.8
-        - image: tjlaboss/centos7-dakota6.14
+        - image: tjlaboss/centos7-dakota6.14:0.0.1
     steps:
       - checkout
       - python/install-packages:
