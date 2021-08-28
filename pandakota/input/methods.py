@@ -84,3 +84,45 @@ class LatinHypercubeSampling(Sampling):
 		return super().add_refinement(refinement_samples)
 
 
+class Optimize(Method):
+	"""Abstract Base Class for all optimization methods"""
+	optimize_type = None
+	
+	def __init__(
+			self,
+			max_iterations: int,
+			max_function_evaluations: int,
+			convergence_tolerance: float
+	):
+		super().__init__()
+		self._id_method = "Optimize"
+		if max_function_evaluations is not None and max_iterations is not None:
+			assert max_function_evaluations > max_iterations, \
+				"The maximum number of function evaluations must exceed the maximum number of iterations."
+		self._max_iterations = max_iterations
+		self._max_function_evaluations = max_function_evaluations
+		self._convergence_tolerance = convergence_tolerance
+	
+	@property
+	def max_iterations(self):
+		return self._max_iterations
+	
+	@property
+	def max_function_evaluations(self):
+		return self._max_function_evaluations
+	
+	@property
+	def convergence_tolerance(self):
+		return self._convergence_tolerance
+	
+	def to_string(self) -> str:
+		ret = super().to_string()
+		ret += "\n\t\t{}".format(self.optimize_type)
+		ret += "\n\t\t\tmax_iterations = {}".format(self._max_iterations)
+		ret += "\n\t\t\tmax_function_evaluations = {}".format(self._max_function_evaluations)
+		ret += "\n\t\t\tconvergence_tolerance = {}".format(self._convergence_tolerance)
+		return ret
+
+
+
+
