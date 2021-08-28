@@ -3,6 +3,7 @@ Names
 
 Simple name spaces
 """
+from pandakota import _yaml
 
 
 class NameSpace:
@@ -30,8 +31,16 @@ class fmt_files(NameSpace):
 
 class dd(NameSpace):
 	"""DAKOTA Default Directories"""
+	workdir = "."
 	study = "dakota_study"
 	plots = "plots"
 	convergence = "converge"
 	iterations = "iters"
+
+
+class config(NameSpace):
+	"""Config keys"""
+	parser = _yaml.parser
+	options = "options.yml"
+	workdir = "workdir"
 

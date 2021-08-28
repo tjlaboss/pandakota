@@ -9,6 +9,8 @@ import typing
 import subprocess
 import pandakota.input
 from pandakota import names
+from pandakota._yaml import yaml
+from pandakota._version import __version__
 
 
 class Study:
@@ -26,6 +28,13 @@ class Study:
 	
 	bin_path: str
 		Path to DAKOTA executable
+	
+	**config: **kwargs dict
+		Configuration dictionary to be written to YAML.
+		Keyword Args:
+		-------------
+		workdir: str
+			Working directory for the study.
 		
 	"""
 	def __init__(
@@ -33,14 +42,16 @@ class Study:
 			deck: pandakota.input.Deck,
 			concurrency: int=None,
 			asynchronous: bool=True,
-			bin_path: str="dakota"
+			bin_path: str="dakota",
+			**config
 	):
+		self._config = config
 		self._deck = deck
 		self.concurrency = concurrency
 		self.asynchronous = asynchronous
 		self._bin_path = bin_path
 		#
-		self._workdir = "."
+		self._workdir = config.get(names.config.workdir, names.dd.workdir)
 		self._dakota_dir = os.path.join(self._workdir, names.dd.study)
 		self._plot_dir = os.path.join(self._workdir, names.dd.plots)
 		self._makedirs()
@@ -50,6 +61,9 @@ class Study:
 		self._last_out = None
 		self._last_tab = None
 		self._last_df = None
+		
+	def __getitem__(self, item):
+		return self._config[item]
 	
 	def _makedirs(self):
 		"""Make the nescessary directories."""
@@ -60,6 +74,15 @@ class Study:
 			# And more to come,
 		):
 			os.makedirs(folder, exist_ok=True)
+	
+	def _write_options_yaml(self, yaml_fname: names.config.options):
+		"""Write the options yaml, obtained from YAML"""
+		yaml_fpath = os.path.join(self._dakota_dir, yaml_fname)
+		with open(yaml_fpath, 'w') as fyaml:
+			fyaml.write(f"# Pandakota v{__version__} Options YAML\n")
+			fyaml.write(f"#    dumped by: {names.config.parser} v{yaml.__version__}\n\n")
+			yaml.dump(self._config, fyaml)
+		print("Options yaml written to: {}".format(yaml_fpath))
 	
 	def _get_execlist(
 			self,
