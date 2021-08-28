@@ -42,8 +42,8 @@ variables
 
 REF_RESPONSES = """\
 responses
-	objective_functions  1
-	descriptors          f
+	response_functions  1
+	descriptors         f
 	numerical_gradients
 	no_hessians
 """

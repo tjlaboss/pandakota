@@ -143,6 +143,7 @@ class Method(abc.ABC):
 class Sampling(Method):
 	"""Abstract Base Class for all sampling methods"""
 	sample_type = None
+	function_key = "response_functions"
 	def __init__(self, nsamples: int, seed: int):
 		super().__init__()
 		assert isinstance(nsamples, int) and nsamples > 0, "nsamples must be an integer > 0."
@@ -194,6 +195,7 @@ class LatinHypercubeSampling(Sampling):
 class Optimize(Method):
 	"""Abstract Base Class for all optimization methods"""
 	optimize_type = None
+	function_key = "objective_functions"
 	
 	def __init__(
 			self,

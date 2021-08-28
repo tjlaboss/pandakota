@@ -178,10 +178,10 @@ class Deck:
 			raise ValueError(f"Method {self._method.__class__.__name__} requires hessians to operate.")
 		return self._method.to_string() + "\n"
 	
-	def _format_output_functions(self, function_key: str) -> str:
-		block = f"\n\t{function_key}  {len(self.functions)}"
+	def _format_output_functions(self) -> str:
+		block = f"\n\t{self._method.function_key}  {len(self.functions)}"
 		sep = "  "
-		block += "\n\tdescriptors".ljust(len(function_key)) + sep
+		block += "\n\tdescriptors".ljust(len(self._method.function_key)) + sep
 		block += sep + sep.join(self.functions)
 		return block
 	
@@ -198,7 +198,7 @@ class Deck:
 	def _format_responses(self):
 		# TODO: Implement
 		block = "responses"
-		block += self._format_output_functions("objective_functions")  # TODO
+		block += self._format_output_functions()  # TODO
 		block += self._format_gradients() + self._format_hessians() + "\n"
 		return block
 
