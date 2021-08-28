@@ -7,7 +7,8 @@ Class for DAKOTA input decks
 import typing
 import collections
 import pandakota.input.variables as v
-import pandakota.input.derivatives as deriv
+from pandakota.input import derivatives as deriv
+from pandakota.input import methods
 
 
 _TV = typing.Dict[typing.Type[v.Variable], typing.Dict[str, v.Variable]]
@@ -18,7 +19,13 @@ class Deck:
 	The duck-typed deck that quacks like a dict
 	
 	"""
-	def __init__(self, functions: typing.Iterable[str]):
+	def __init__(
+			self,
+			method: methods.Method,
+			functions: typing.Iterable[str]
+	):
+		self._method = None
+		self.method: methods.Method = method
 		self._all_variable_keys: typing.Set[str] = set()
 		self._typed_variables: _TV = {_t: dict() for _t in v.TYPED_VARIABLES}
 		self._chained_variables = collections.ChainMap(*self._typed_variables.values())
@@ -40,6 +47,16 @@ class Deck:
 	
 	def items(self):
 		return {k: self[k] for k in self}.items()
+	
+	@property
+	def method(self) -> methods.Method:
+		return self._method
+	
+	@method.setter
+	def method(self, meth: methods.Method):
+		if not isinstance(meth, methods.Method):
+			raise TypeError("Deck.method must be an instance of Method.")
+		self._method = meth
 	
 	@property
 	def functions(self) -> typing.List[str]:
@@ -154,6 +171,13 @@ class Deck:
 			block += self._format_variable_type(VariableClass)
 		return block
 	
+	def _format_method(self) -> str:
+		if self._method.requires_gradients and not self._gradients:
+			raise ValueError(f"Method {self._method.__class__.__name__} requires gradients to operate.")
+		if self._method.requires_hessians and not self._hessians:
+			raise ValueError(f"Method {self._method.__class__.__name__} requires hessians to operate.")
+		return self._method.to_string() + "\n"
+	
 	def _format_output_functions(self, function_key: str) -> str:
 		block = f"\n\t{function_key}  {len(self.functions)}"
 		sep = "  "
@@ -182,6 +206,7 @@ class Deck:
 		"""WORK IN PROGRESS"""
 		deck_text = "# Dakota Input File"
 		deck_text += "\n\n"
+		deck_text += self._format_method()
 		deck_text += self._format_variables()
 		deck_text += self._format_responses()
 		return deck_text

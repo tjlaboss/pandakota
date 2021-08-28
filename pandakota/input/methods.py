@@ -36,13 +36,13 @@ class Method(abc.ABC):
 class Sampling(Method):
 	"""Abstract Base Class for all sampling methods"""
 	sample_type = None
-	
 	def __init__(self, nsamples: int, seed: int):
 		super().__init__()
 		assert isinstance(nsamples, int) and nsamples > 0, "nsamples must be an integer > 0."
 		assert isinstance(seed, int), "seed must be an integer"
 		self._nsamples = nsamples
 		self._seed = seed
+		self._id_method = "UQ"
 	
 	@property
 	def nsamples(self):

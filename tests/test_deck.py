@@ -3,7 +3,8 @@
 import pandakota
 
 
-deck = pandakota.input.Deck(functions=['f'])
+lhs = pandakota.input.methods.LatinHypercubeSampling(400, 42)
+deck = pandakota.input.Deck(functions=['f'], method=lhs)
 n1 = pandakota.input.NormalUncertainVariable('nuv', 1.0, 0.05)
 n2 = pandakota.input.NormalUncertainVariable(
 	key='NormalVariable', mean=-1.234e6, std_dev=.00001
@@ -15,6 +16,15 @@ for _var in input_vars:
 deck.gradients = pandakota.input.derivatives.Gradients(
 	gradient_type=pandakota.input.derivatives.DERIVATIVE_NUMERIC
 )
+
+REF_METHOD = """\
+method
+	id_method = "UQ"
+	sampling
+		sample_type = lhs
+		seed = 42
+		samples = 400
+"""
 
 REF_VARIABLES = """\
 variables
@@ -63,6 +73,11 @@ def test_wrong_variable_type():
 		pass
 	else:
 		raise AssertionError("Failed to catch wrong variable type.")
+	
+
+def test_method_generation():
+	assert deck._format_method() == REF_METHOD, \
+		"Method generation test failed."
 
 
 def test_variable_generation():
