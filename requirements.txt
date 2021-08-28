@@ -1,5 +1,6 @@
 # Requirements without versions
 pytest
+ruamel.yaml
 
 # Requirements with major version numbers
 pandas >= 1
