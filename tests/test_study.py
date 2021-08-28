@@ -20,6 +20,7 @@ class FileIO(io.StringIO):
 
 
 def test_echo():
+	"""Test a command that should succeed"""
 	sys.stdout = FileIO(1)
 	stu = pandakota.Study(deck, bin_path="echo", workdir=".test_echo/")
 	stu.run_dakota()
@@ -27,4 +28,12 @@ def test_echo():
 	with open(f"{stu._dakota_dir}/dak.in", 'r') as fin:
 		text = fin.read()
 	assert solution in text, "echo test failed"
+	shutil.rmtree(stu._workdir)
+
+
+def test_dry_run():
+	"""Test a command that should fail"""
+	sys.stdout = FileIO(1)
+	stu = pandakota.Study(deck, bin_path="blargh", workdir=".test_dry_run/")
+	stu.run_dakota(dry_run=True)
 	shutil.rmtree(stu._workdir)
