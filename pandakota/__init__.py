@@ -1,5 +1,5 @@
 import pandakota.reader
 import pandakota.input
-import pandakota.study
+from pandakota.study import Study
 
 from ._version import __version__, __version_info__

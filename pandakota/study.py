@@ -43,12 +43,23 @@ class Study:
 		self._workdir = "."
 		self._dakota_dir = os.path.join(self._workdir, names.dd.study)
 		self._plot_dir = os.path.join(self._workdir, names.dd.plots)
+		self._makedirs()
 		#
 		self._last_rst = None
 		self._last_inp = None
 		self._last_out = None
 		self._last_tab = None
 		self._last_df = None
+	
+	def _makedirs(self):
+		"""Make the nescessary directories."""
+		for folder in (
+			self._workdir,
+			self._dakota_dir,
+			self._plot_dir,
+			# And more to come,
+		):
+			os.makedirs(folder, exist_ok=True)
 	
 	def _get_execlist(
 			self,
