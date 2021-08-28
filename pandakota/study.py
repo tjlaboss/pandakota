@@ -100,7 +100,8 @@ class Study:
 			self,
 			dakota_in: str,
 			deck_text: str,
-			exec_list: typing.List[str]
+			exec_list: typing.List[str],
+			dry=False
 	) -> subprocess.Popen:
 		"""Execute DAKOTA, returning the process.
 
@@ -114,20 +115,23 @@ class Study:
 			
 		exec_list: list
 			Execution list to pass to subprocess.Popen.
+		
+		dry: bool, optional
+			Whether to do a dry run (write deck, nothing).
 			
 		Returns:
 		--------
-		if wait is True -> int
-			Exit code for the DAKOTA execution subprocess.
-			
-		if wait is False -> subprocess.Popen
+		proc: subprocess.Popen
 			Opened process instance.
 		"""
 		
 		with open(dakota_in, 'w') as f:
 			f.write(deck_text)
 		print(f"DAKOTA deck written to: {dakota_in}")
-		# Execute incremented DAKOTA deck
+		# Deal with dry run case
+		if dry:
+			exec_list = ["echo", "Dry Run: $"] + exec_list
+		# Execute DAKOTA deck
 		orig = os.getcwd()
 		os.chdir(self._dakota_dir)
 		print(f"Executing:\n\t{self._dakota_dir}$  {' '.join(exec_list)}")
@@ -145,9 +149,10 @@ class Study:
 			dakota_in: str,
 			deck_text: str,
 			exec_list: typing.List[str],
+			dry=False
 	) -> int:
 		"""Execute DAKOTA, wait, and return the exit code."""
-		proc = self._execute_process(dakota_in, deck_text, exec_list)
+		proc = self._execute_process(dakota_in, deck_text, exec_list, dry)
 		exitcode = proc.wait()
 		if not exitcode:
 			print("...DAKOTA execution is complete.")
@@ -155,8 +160,17 @@ class Study:
 			print("...DAKOTA execution FAILED.", file=sys.stderr)
 		return exitcode
 	
-	def run_dakota(self):
-		"""Run the initial samples"""
+	def run_dakota(self, dry_run=False):
+		"""Run the initial samples
+		
+		Parameters:
+		-----------
+		dry_run: bool, optioanl
+			Whether to do a "dry run": generate everything,
+			but do not actually execute DAKOTA.
+			[Default: False]
+		
+		"""
 		first_restart = names.fmt_files.rst.format(0)
 		execlist = self._get_execlist(
 			dak_in=names.files.inp,
@@ -172,6 +186,7 @@ class Study:
 			dakota_in=os.path.join(self._dakota_dir, names.files.inp),
 			deck_text=text,
 			exec_list=execlist,
+			dry=dry_run
 		)
 		# Load results
 		self._last_rst = first_restart
