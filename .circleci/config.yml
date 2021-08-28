@@ -19,6 +19,7 @@ workflows:
               only: 
                 - master
                 - develop
+                - circleci-editor/develop
       - deploy-github-pages:
           requires:
             - build-docs
@@ -28,11 +29,13 @@ workflows:
 jobs:
   test:
     docker: &pydocker
-      - image: cimg/python:3.8
+      # - image: cimg/python:3.8
+        - image: tjlaboss/centos7-dakota6.14
     steps:
       - checkout
       - python/install-packages:
-          pkg-manager: pip
+          pkg-manager: &pypkg
+            pip
       - run:
           name: Run tests
           command: ./run_tests.sh
@@ -42,7 +45,7 @@ jobs:
     steps:
       - checkout
       - python/install-packages:
-          pkg-manager: pip
+          pkg-manager: *pypkg
           pip-dependency-file: doc/requirements.txt
       - run:
           name: Build docs
