@@ -9,7 +9,7 @@ import typing
 import subprocess
 import pandakota.input
 from pandakota import names
-from pandakota._yaml import yaml
+from pandakota import _yaml
 from pandakota._version import __version__
 
 
@@ -80,8 +80,8 @@ class Study:
 		yaml_fpath = os.path.join(self._dakota_dir, yaml_fname)
 		with open(yaml_fpath, 'w') as fyaml:
 			fyaml.write(f"# Pandakota v{__version__} Options YAML\n")
-			fyaml.write(f"#    dumped by: {names.config.parser} v{yaml.__version__}\n\n")
-			yaml.dump(self._config, fyaml)
+			fyaml.write(f"#    dumped by: {_yaml.parser} v{_yaml.yaml.__version__}\n\n")
+			_yaml.dump(self._config, fyaml)
 		print(f"Options yaml written to: {yaml_fpath}")
 	
 	def _get_execlist(
