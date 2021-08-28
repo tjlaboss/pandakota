@@ -21,12 +21,10 @@ class FileIO(io.StringIO):
 
 def test_echo():
 	sys.stdout = FileIO(1)
-	stu = pandakota.Study(deck, bin_path="echo")
+	stu = pandakota.Study(deck, bin_path="echo", workdir=".test_echo/")
 	stu.run_dakota()
 	solution = "# Usage:\n#   echo -i dak.in -o dak.out -write_restart Restart0.rst"
-	with open("dakota_study/dak.in", 'r') as fin:
+	with open(f"{stu._dakota_dir}/dak.in", 'r') as fin:
 		text = fin.read()
 	assert solution in text, "echo test failed"
-	# TODO: change this once workdir is configurable
-	shutil.rmtree(stu._plot_dir)
-	shutil.rmtree(stu._dakota_dir)
+	shutil.rmtree(stu._workdir)
