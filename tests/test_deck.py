@@ -12,6 +12,9 @@ u = pandakota.input.UniformUncertainVariable('u', -3.33, 0.33)
 input_vars = (n1, n2, u)
 for _var in input_vars:
 	deck.add_variable(_var)
+deck.gradients = pandakota.input.derivatives.Gradients(
+	gradient_type=pandakota.input.derivatives.DERIVATIVE_NUMERIC
+)
 
 REF_VARIABLES = """\
 variables
@@ -31,7 +34,7 @@ REF_RESPONSES = """\
 responses
 	objective_functions  1
 	descriptors          f
-	no_gradients
+	numerical_gradients
 	no_hessians
 """
 

@@ -7,6 +7,7 @@ Class for DAKOTA input decks
 import typing
 import collections
 import pandakota.input.variables as v
+import pandakota.input.derivatives as deriv
 
 
 _TV = typing.Dict[typing.Type[v.Variable], typing.Dict[str, v.Variable]]
@@ -23,7 +24,9 @@ class Deck:
 		self._chained_variables = collections.ChainMap(*self._typed_variables.values())
 		if isinstance(functions, str):
 			functions = [functions]
-		self.functions = functions
+		self._functions: typing.List[str] = functions
+		self._gradients: deriv.Gradients = None
+		self._hessians: deriv.Hessians = None
 		
 	
 	def __iter__(self):
@@ -37,6 +40,32 @@ class Deck:
 	
 	def items(self):
 		return {k: self[k] for k in self}.items()
+	
+	@property
+	def functions(self) -> typing.List[str]:
+		return self._functions
+	
+	@property
+	def gradients(self) -> deriv.Gradients:
+		return self._gradients
+	
+	@gradients.setter
+	def gradients(self, grad: deriv.Gradients):
+		if grad is not None and not isinstance(grad, deriv.Gradients):
+			raise TypeError("Deck.gradients must be an instance of Gradients.")
+		# TODO: Add essential checking
+		self._gradients = grad
+	
+	@property
+	def hessians(self) -> deriv.Hessians:
+		return self._hessians
+	
+	@hessians.setter
+	def hessians(self, hess: deriv.Hessians):
+		if hess is not None and not isinstance(hess, deriv.Hessians):
+			raise TypeError("Deck.hessians must be an instance of Hessian.")
+		# TODO: Add essential checking
+		self._hessians = hess
 	
 	@property
 	def state_variables(self):
@@ -125,18 +154,22 @@ class Deck:
 			block += self._format_variable_type(VariableClass)
 		return block
 	
-	def _format_output_functions(self, function_key: str):
+	def _format_output_functions(self, function_key: str) -> str:
 		block = f"\n\t{function_key}  {len(self.functions)}"
 		sep = "  "
 		block += "\n\tdescriptors".ljust(len(function_key)) + sep
 		block += sep + sep.join(self.functions)
 		return block
 	
-	def _format_gradients(self):
-		return "\n\tno_gradients"
+	def _format_gradients(self) -> str:
+		if not self._gradients:
+			return "\n\tno_gradients"
+		return self._gradients.to_string()
 	
-	def _format_hessians(self):
-		return "\n\tno_hessians"
+	def _format_hessians(self) -> str:
+		if not self._hessians:
+			return "\n\tno_hessians"
+		return self._hessians.to_string()
 	
 	def _format_responses(self):
 		# TODO: Implement
@@ -144,12 +177,11 @@ class Deck:
 		block += self._format_output_functions("objective_functions")  # TODO
 		block += self._format_gradients() + self._format_hessians() + "\n"
 		return block
-		
-
 
 	def get_deck(self) -> str:
 		"""WORK IN PROGRESS"""
 		deck_text = "# Dakota Input File"
 		deck_text += "\n\n"
 		deck_text += self._format_variables()
+		deck_text += self._format_responses()
 		return deck_text
