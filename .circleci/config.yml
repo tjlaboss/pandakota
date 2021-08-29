@@ -30,12 +30,12 @@ jobs:
   test:
     docker: &pydocker
       # - image: cimg/python:3.8
-        - image: tjlaboss/centos7-dakota6.14:0.0.2
+        - image: tjlaboss/centos7-dakota6.14:0.0.3
     steps:
       - checkout
       - python/install-packages:
           pkg-manager: &pypkg
-            /usr/bin/pip3
+            pip
       - run:
           name: Run tests
           command: ./run_tests.sh
