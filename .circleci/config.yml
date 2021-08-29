@@ -5,7 +5,7 @@ orbs:
   # Orb commands and jobs help you with common scripting around a language/tool
   # so you dont have to copy and paste it everywhere.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
-  python: circleci/python@1.2
+  python: circleci/python@1.4
 
 workflows:
   default:
@@ -35,7 +35,7 @@ jobs:
       - checkout
       - python/install-packages:
           pkg-manager: &pypkg
-            pip
+            /usr/bin/pip3
       - run:
           name: Run tests
           command: ./run_tests.sh
