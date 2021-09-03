@@ -43,5 +43,6 @@ class config(NameSpace):
 	"""Config keys"""
 	parser = _yaml.parser
 	options = "options.yml"
+	driver = "driver"
 	workdir = "workdir"
 
