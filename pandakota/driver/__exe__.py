@@ -3,11 +3,13 @@
 Callable Analysis Driver for DAKOTA
 """
 
-import os.path
-import pandakota.names
-from pandakota._yaml import yaml, ParserError
 import argparse
 import typing
+import os.path
+import logging
+import dakota.interfacing as di
+import pandakota.names
+from pandakota._yaml import yaml, ParserError
 
 
 def load_options() -> typing.Dict:
@@ -24,6 +26,19 @@ def load_options() -> typing.Dict:
 	return options
 
 
+def create_driver(params) -> pandakota.Driver:
+	log_queue = []
+	options = load_options()
+	eval_id = int(params.eval_id)
+	driver_dict = options[pandakota.names.config.driver]
+	DriverClass = pandakota.Driver.classFromDict(driver_dict)
+	log_queue.append((logging.INFO, f"Using class: {DriverClass.__name__}"))
+	driver = DriverClass(eval_id, params._variables, **options)
+	while log_queue:
+		driver.log(*log_queue.pop(0))  # FIFO
+	return driver
+
+
 def main():
 	descript = f"Generic analysis_driver script for Pandakota v{pandakota.__version__}"
 	parser = argparse.ArgumentParser(description=descript)
@@ -38,6 +53,8 @@ def main():
 		help="Path to DAKOTA results (output) file"
 	)
 	args = parser.parse_args()
+	params, results = di.read_parameters_file(args.params, args.results)
+	driver = create_driver(params)
 	raise NotImplementedError("Have not implemented main() yet.")
 
 
