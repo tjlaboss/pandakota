@@ -4,9 +4,11 @@ Analysis Driver
 
 import io
 import os
+import sys
 import abc
 import typing
 import inspect
+import importlib
 import logging
 import fcntl
 import atexit
@@ -19,7 +21,20 @@ RESULT_TYPE = typing.Tuple[
 
 
 class Driver(abc.ABC):
-	"""Abstract Base Class for a DAKOTA analysis driver"""
+	"""Abstract Base Class for a DAKOTA analysis driver
+	
+	Can be saved or recreated by a dictionary with the following keys:
+		"class":
+			Class name, if not "Driver". Optional.
+		"module":
+			Module name providing driver. E.g., "base_driver".
+			d["class"] must be in its namespace. Required.
+		"path":
+			Path to the directory in which 'module' is found,
+			if 'module' is not already in the $PYTHONPATH.
+			(Will append to sys.path.) Optional.
+	
+	"""
 	# DAKOTA tags
 	function_tag = "function"
 	gradient_tag = "gradient"
@@ -56,6 +71,31 @@ class Driver(abc.ABC):
 			cls._pth_tag: moddir
 		}
 		return dict_out
+	
+	@classmethod
+	def classFromDict(cls, d: typing.Dict[str, str]) -> typing.Type:
+		"""Given dict of 'path', 'module', and 'class' strs, instantiate Driver class
+
+		Parameters:
+		-----------
+		d: dict
+			Dictionary with "class", "module", and "path".
+
+		Returns:
+		--------
+		Subclass of Driver
+		"""
+		if "module" not in d:
+			raise KeyError("Driver.ClassFromDict() requires 'module' to be specified.")
+		modpath = d.get("path")
+		if modpath and modpath not in sys.path:
+			sys.path.append(modpath)
+		module = importlib.import_module(d["module"])
+		class_name = d.get("class", cls.__name__)
+		DriverClass = getattr(module, class_name)
+		assert issubclass(DriverClass, cls), \
+			f"{class_name} does not appear to be a subclass of {cls.__name__}."
+		return DriverClass
 	
 	def _write_stream(self):
 		"""Write the stream to the communal log."""
