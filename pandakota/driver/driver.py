@@ -14,10 +14,12 @@ import fcntl
 import atexit
 
 
-RESULT_TYPE = typing.Tuple[
+ResultType = typing.Tuple[
 	int,
 	typing.Dict[str, typing.Dict],
 ]
+
+DriverType = typing.Type['Driver']
 
 
 class Driver(abc.ABC):
@@ -59,7 +61,7 @@ class Driver(abc.ABC):
 	_mod_tag = "module"
 	_pth_tag = "path"
 	
-	def __init__(self, eval_id, param_dict, **options):
+	def __init__(self, eval_id: int, param_dict: typing.Dict, **options):
 		self._eval_id = eval_id
 		self.param_dict = param_dict
 		self._logger: logging.Logger = None
@@ -72,7 +74,7 @@ class Driver(abc.ABC):
 		atexit.register(self._write_stream)
 	
 	@property
-	def eval_id(self):
+	def eval_id(self) -> int:
 		return self._eval_id
 	
 	@classmethod
@@ -88,7 +90,7 @@ class Driver(abc.ABC):
 		return dict_out
 	
 	@classmethod
-	def classFromDict(cls, d: typing.Dict[str, str]) -> typing.Type:
+	def classFromDict(cls, d: typing.Dict[str, str]) -> DriverType:
 		"""Given dict of 'path', 'module', and 'class' strs, instantiate Driver class
 
 		Parameters:
@@ -155,7 +157,7 @@ class Driver(abc.ABC):
 		pass
 	
 	@abc.abstractmethod
-	def get_results(self) -> RESULT_TYPE:
+	def get_results(self) -> ResultType:
 		"""Collect and return the results."""
 		err_stat = 1
 		error_result = {"Error": "No results to load."}

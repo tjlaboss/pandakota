@@ -41,7 +41,7 @@ def create_driver(params: di.Parameters) -> pandakota.Driver:
 	return driver
 
 
-def run(driver: pandakota.Driver) -> pandakota.driver.driver.RESULT_TYPE:
+def run(driver: pandakota.Driver) -> pandakota.driver.driver.ResultType:
 	driver.write_inputs()
 	driver.run_analysis()
 	return driver.get_results()
