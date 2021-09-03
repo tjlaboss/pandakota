@@ -217,7 +217,7 @@ class Deck:
 			block += '\n\t\tasynchronous'
 			if concurrency:
 				block += f'\n\t\t\tevaluation_concurrency = {concurrency}'
-			block += f'\n\t\tanalysis_driver = "{driver}"'
+		block += f'\n\t\tanalysis_driver = "{driver}"'
 		block += f'\n\tparameters_file = {files.parameters}'
 		block += f'\n\tresults         = {files.results}'
 		block += '\n'
@@ -225,7 +225,7 @@ class Deck:
 
 	def get_deck(
 			self,
-			driver_path: str,
+			driver_bin: str,
 			executioner: str="",
 			asynchronous: bool=True,
 			concurrency: int=None,
@@ -237,7 +237,7 @@ class Deck:
 			deck_text += f"\n#   {executioner}"
 		deck_text += "\n\n"
 		deck_text += self._format_method()
-		deck_text += self._format_interface(driver_path, asynchronous, concurrency)
+		deck_text += self._format_interface(driver_bin, asynchronous, concurrency)
 		deck_text += self._format_variables()
 		deck_text += self._format_responses()
 		return deck_text
