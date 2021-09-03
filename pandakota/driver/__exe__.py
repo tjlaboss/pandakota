@@ -39,6 +39,13 @@ def create_driver(params) -> pandakota.Driver:
 	return driver
 
 
+def run(driver: pandakota.Driver) -> pandakota.driver.driver.RESULT_TYPE:
+	driver.write_inputs()
+	driver.run_analysis()
+	return driver.get_results()
+	
+
+
 def main():
 	descript = f"Generic analysis_driver script for Pandakota v{pandakota.__version__}"
 	parser = argparse.ArgumentParser(description=descript)
@@ -55,6 +62,7 @@ def main():
 	args = parser.parse_args()
 	params, results = di.read_parameters_file(args.params, args.results)
 	driver = create_driver(params)
+	run(driver)
 	raise NotImplementedError("Have not implemented main() yet.")
 
 
