@@ -92,8 +92,17 @@ class Driver(abc.ABC):
 		}
 		return err_stat, results
 		
-		
+	def kill(self):
+		"""Kill any subprocesses.
 
-
-
-
+		Warnings:
+		---------
+		If using individual log files, the logging will not work correctly here
+		if we ``do atexit.register(self.kill)`` from within this object. It can
+		and will overwrite the individual log file. This is not a problem when
+		using collective logging.
+		"""
+		self.log(logging.INFO, f"Killing {self.__class__.__name__} {self.eval_id}")
+		for proc in self._procs:
+			proc.kill()
+		self._procs = []
