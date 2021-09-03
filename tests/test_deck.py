@@ -43,7 +43,7 @@ variables
 REF_RESPONSES = """\
 responses
 	response_functions  1
-	descriptors         f
+	descriptors         "f"
 	numerical_gradients
 	no_hessians
 """
