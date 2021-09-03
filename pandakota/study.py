@@ -8,6 +8,7 @@ import sys
 import typing
 import subprocess
 import pandakota.input
+from pandakota import driver
 from pandakota import names
 from pandakota import _yaml
 from pandakota._version import __version__
@@ -40,6 +41,7 @@ class Study:
 	def __init__(
 			self,
 			deck: pandakota.input.Deck,
+			DriverClass: typing.Type,
 			concurrency: int=None,
 			asynchronous: bool=True,
 			bin_path: str="dakota",
@@ -50,6 +52,9 @@ class Study:
 		self.concurrency = concurrency
 		self.asynchronous = asynchronous
 		self._bin_path = bin_path
+		#
+		self._driver = None
+		self.driver = DriverClass
 		#
 		self._workdir = config.get(names.config.workdir, names.dd.workdir)
 		self._dakota_dir = os.path.join(self._workdir, names.dd.study)
@@ -64,6 +69,18 @@ class Study:
 		
 	def __getitem__(self, item):
 		return self._config[item]
+	
+	@property
+	def driver(self) -> driver.Driver:
+		return self._driver
+	
+	@driver.setter
+	def driver(self, DriverClass: typing.Type):
+		assert issubclass(DriverClass, driver.Driver), \
+			"DriverClass must be a subclass of pandakota.Driver " \
+			f"(not type: {type(DriverClass)})."
+		self._driver = DriverClass
+		self._config["driver"] = DriverClass.__dict__
 	
 	def _makedirs(self):
 		"""Make the nescessary directories."""
