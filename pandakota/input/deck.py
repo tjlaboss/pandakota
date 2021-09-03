@@ -184,7 +184,7 @@ class Deck:
 		block = f"\n\t{self._method.function_key}  {len(self.functions)}"
 		sep = "  "
 		block += "\n\tdescriptors".ljust(len(self._method.function_key)) + sep
-		block += sep + sep.join(self.functions)
+		block += sep + sep.join([f'"{f}"' for f in self.functions])
 		return block
 	
 	def _format_gradients(self) -> str:
@@ -218,8 +218,8 @@ class Deck:
 			if concurrency:
 				block += f'\n\t\t\tevaluation_concurrency = {concurrency}'
 		block += f'\n\t\tanalysis_driver = "{driver}"'
-		block += f'\n\tparameters_file = {files.parameters}'
-		block += f'\n\tresults         = {files.results}'
+		block += f'\n\tparameters_file = "{files.parameters}"'
+		block += f'\n\tresults         = "{files.results}"'
 		block += '\n'
 		return block
 
