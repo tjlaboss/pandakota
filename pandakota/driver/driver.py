@@ -2,9 +2,10 @@
 Analysis Driver
 """
 
-
+import io
 import abc
 import typing
+import logging
 
 
 RESULT_TYPE = typing.Tuple[
@@ -31,6 +32,21 @@ class Driver(abc.ABC):
 	@property
 	def eval_id(self):
 		return self._eval_id
+	
+	def activate_collective_logging(self, logfile: str, logfmt=None):
+		"""Set up logging for the communal log file."""
+		self._logfile = logfile
+		self._logstream = io.StringIO()
+		self._loghandler = logging.StreamHandler(self._logstream)
+		self._logger.addHandler(self._loghandler)
+		if logfmt:
+			self._loghandler.setFormatter(logging.Formatter(logfmt))
+	
+	def log(self, level: int, msg: str, *args, **kwargs):
+		"""Log a message the driver level."""
+		if self._logger is None:
+			self._logger = logging.getLogger(self.__class__.__name__)
+		self._logger.log(level, msg, *args, **kwargs)
 
 	@abc.abstractmethod
 	def write_inputs(self):
