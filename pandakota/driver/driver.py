@@ -23,6 +23,9 @@ RESULT_TYPE = typing.Tuple[
 class Driver(abc.ABC):
 	"""Abstract Base Class for a DAKOTA analysis driver
 	
+	The Class is effectively the analysis_driver.
+	Each instance represents a single DAKOTA sample.
+	
 	Can be saved or recreated by a dictionary with the following keys:
 		"class":
 			Class name, if not "Driver". Optional.
@@ -34,6 +37,18 @@ class Driver(abc.ABC):
 			if 'module' is not already in the $PYTHONPATH.
 			(Will append to sys.path.) Optional.
 	
+	Parameters:
+	-----------
+	eval_id: int
+		DAKOTA evaluation ID.
+	
+	param_dict: dict
+		Dictionary of {parameter: value} for this particular sample.
+	
+	**options: Keyword Arguments
+		The contents of the options YAML.
+		Available for use in subclasses.
+	
 	"""
 	# DAKOTA tags
 	function_tag = "function"
@@ -44,7 +59,7 @@ class Driver(abc.ABC):
 	_mod_tag = "module"
 	_pth_tag = "path"
 	
-	def __init__(self, eval_id, param_dict, **kwargs):
+	def __init__(self, eval_id, param_dict, **options):
 		self._eval_id = eval_id
 		self.param_dict = param_dict
 		self._logger: logging.Logger = None
