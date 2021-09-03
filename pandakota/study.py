@@ -80,7 +80,7 @@ class Study:
 			"DriverClass must be a subclass of pandakota.Driver " \
 			f"(not type: {type(DriverClass)})."
 		self._driver = DriverClass
-		self._config["driver"] = DriverClass.classToDict()
+		self._config[names.config.driver] = DriverClass.classToDict()
 	
 	def _makedirs(self):
 		"""Make the nescessary directories."""
