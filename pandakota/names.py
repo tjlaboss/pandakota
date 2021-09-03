@@ -19,6 +19,7 @@ class files(NameSpace):
 	tab = "dak.tab"
 	parameters = "params.in"
 	results = "results.out"
+	driver = "driver.sh"
 
 
 class fmt_files(NameSpace):
