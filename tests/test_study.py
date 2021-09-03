@@ -1,8 +1,11 @@
 """Test the Study class"""
 import io
+import os
 import sys
 import shutil
 import pandakota
+
+os.environ["DAKOTA_ROOT"] = "/dakota/"
 
 mc = pandakota.input.methods.MonteCarloSampling(100, 42)
 deck = pandakota.input.Deck(functions=['f'], method=mc)
@@ -22,7 +25,12 @@ class FileIO(io.StringIO):
 def test_echo():
 	"""Test a command that should succeed"""
 	sys.stdout = FileIO(1)
-	stu = pandakota.Study(deck, bin_path="echo", workdir=".test_echo/")
+	stu = pandakota.Study(
+		deck,
+		DriverClass=pandakota.Driver,
+		bin_path="echo",
+		workdir=".test_echo/"
+	)
 	stu.run_dakota()
 	solution = "# Usage:\n#   echo -i dak.in -o dak.out -write_restart Restart0.rst"
 	with open(f"{stu._dakota_dir}/dak.in", 'r') as fin:
@@ -34,6 +42,11 @@ def test_echo():
 def test_dry_run():
 	"""Test a command that should fail"""
 	sys.stdout = FileIO(1)
-	stu = pandakota.Study(deck, bin_path="blargh", workdir=".test_dry_run/")
+	stu = pandakota.Study(
+		deck,
+		DriverClass=pandakota.Driver,
+		bin_path="blargh",
+		workdir=".test_dry_run/"
+	)
 	stu.run_dakota(dry_run=True)
 	shutil.rmtree(stu._workdir)
