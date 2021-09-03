@@ -3,8 +3,10 @@ Analysis Driver
 """
 
 import io
+import os
 import abc
 import typing
+import inspect
 import logging
 import fcntl
 import atexit
@@ -18,9 +20,14 @@ RESULT_TYPE = typing.Tuple[
 
 class Driver(abc.ABC):
 	"""Abstract Base Class for a DAKOTA analysis driver"""
+	# DAKOTA tags
 	function_tag = "function"
 	gradient_tag = "gradient"
 	hessian_tag = "hessian"
+	# Hacky module tags
+	_cls_tag = "class"
+	_mod_tag = "module"
+	_pth_tag = "path"
 	
 	def __init__(self, eval_id, param_dict, **kwargs):
 		self._eval_id = eval_id
@@ -37,6 +44,18 @@ class Driver(abc.ABC):
 	@property
 	def eval_id(self):
 		return self._eval_id
+	
+	@classmethod
+	def classToDict(cls) -> typing.Dict[str, str]:
+		mod_fpath = inspect.getmodule(cls).__file__
+		moddir, modfile = os.path.split(mod_fpath)
+		module = os.path.splitext(modfile)[0]
+		dict_out = {
+			cls._cls_tag: cls.__name__,
+			cls._mod_tag: module,
+			cls._pth_tag: moddir
+		}
+		return dict_out
 	
 	def _write_stream(self):
 		"""Write the stream to the communal log."""
