@@ -16,4 +16,4 @@ def get_driver_sh(
 		dakota_root: str,
 		dakota_python="$DAKOTA/share/dakota/Python",
 ) -> str:
-	return TEMPLATE.format(dakota_root, dakota_python)
+	return TEMPLATE.format(**locals())
