@@ -8,9 +8,11 @@ PYYAML = "PyYAML"
 
 try:
 	from ruamel import yaml
+	from ruamel.yaml.parser import ParserError
 	parser = RUAMEL
 except (ModuleNotFoundError, ImportError):
 	import yaml
+	from yaml.parser import ParserError
 	parser = PYYAML
 
 
