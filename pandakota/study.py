@@ -27,8 +27,11 @@ class Study:
 	asynchronous: bool
 		Whether to run samples asynchronously
 	
-	bin_path: str
+	bin_path: str, optional
 		Path to DAKOTA executable
+		[Default: "dakota"]
+	
+	
 	
 	**config: **kwargs dict
 		Configuration dictionary to be written to YAML.
@@ -45,6 +48,7 @@ class Study:
 			concurrency: int=None,
 			asynchronous: bool=True,
 			bin_path: str="dakota",
+			root_path: str="",
 			**config
 	):
 		self._config = config
@@ -53,10 +57,15 @@ class Study:
 		self.asynchronous = asynchronous
 		self._bin_path = bin_path
 		#
+		root_path = root_path if root_path else os.environ.get("DAKOTA_ROOT")
+		if not root_path:
+			raise ValueError("'root_path' must be passed if environment variable $DAKOTA_ROOT is not set.")
+		self._root_path = root_path
+		#
 		self._driver = None
 		self.driver = DriverClass
 		#
-		self._workdir = config.get(names.config.workdir, names.dd.workdir)
+		self._workdir = os.path.abspath(config.get(names.config.workdir, names.dd.workdir))
 		self._dakota_dir = os.path.join(self._workdir, names.dd.study)
 		self._plot_dir = os.path.join(self._workdir, names.dd.plots)
 		self._makedirs()
@@ -184,7 +193,7 @@ class Study:
 		
 		Parameters:
 		-----------
-		dry_run: bool, optioanl
+		dry_run: bool, optional
 			Whether to do a "dry run": generate everything,
 			but do not actually execute DAKOTA.
 			[Default: False]
@@ -196,7 +205,7 @@ class Study:
 			dak_out=names.files.out,
 			dak_rst=first_restart
 		)
-		driver_script = pandakota.driver.get_driver_sh(self._dakota_dir)
+		driver_script = pandakota.driver.get_driver_sh(self._root_path)
 		driver_sh = os.path.join(self._dakota_dir, names.files.driver)
 		with open(driver_sh, 'w') as fd:
 			fd.write(driver_script)
