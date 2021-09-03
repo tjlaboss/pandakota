@@ -8,7 +8,7 @@ import sys
 import typing
 import subprocess
 import pandakota.input
-from pandakota import driver
+import pandakota.driver
 from pandakota import names
 from pandakota import _yaml
 from pandakota._version import __version__
@@ -21,6 +21,9 @@ class Study:
 	-----------
 	deck: pandakota.input.Deck
 	
+	DriverClass: subclass of pandakota.driver.Driver
+		Analysis driver class to use for each sample.
+	
 	concurrency: int or None
 		Level of concurrency
 	
@@ -31,7 +34,9 @@ class Study:
 		Path to DAKOTA executable
 		[Default: "dakota"]
 	
-	
+	root_path: str, optional
+		Path to the DAKOTA root installation.
+		[Default: $DAKOTA_ROOT in the user's environment.]
 	
 	**config: **kwargs dict
 		Configuration dictionary to be written to YAML.
@@ -44,7 +49,7 @@ class Study:
 	def __init__(
 			self,
 			deck: pandakota.input.Deck,
-			DriverClass: typing.Type,
+			DriverClass: typing.Type[pandakota.driver.Driver],
 			concurrency: int=None,
 			asynchronous: bool=True,
 			bin_path: str="dakota",
@@ -80,12 +85,12 @@ class Study:
 		return self._config[item]
 	
 	@property
-	def driver(self) -> driver.Driver:
+	def driver(self) -> pandakota.driver.DriverType:
 		return self._driver
 	
 	@driver.setter
-	def driver(self, DriverClass: typing.Type):
-		assert issubclass(DriverClass, driver.Driver), \
+	def driver(self, DriverClass: pandakota.driver.DriverType):
+		assert issubclass(DriverClass, pandakota.driver.Driver), \
 			"DriverClass must be a subclass of pandakota.Driver " \
 			f"(not type: {type(DriverClass)})."
 		self._driver = DriverClass
