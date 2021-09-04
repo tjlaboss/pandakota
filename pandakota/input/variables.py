@@ -6,6 +6,7 @@ Module containing DAKOTA variable classes
 import abc
 import typing
 
+
 class Variable(abc.ABC):
 	"""Abstract Base Class for DAKOTA input variable
 	
@@ -106,6 +107,7 @@ class StateVariable(Variable):
 			propdict["elements"] = propdict["elements"].replace(' ', '"')
 		return propdict
 
+
 class NormalUncertainVariable(Variable):
 	"""DAKOTA input variable described by a normal distribution
 
@@ -186,11 +188,62 @@ class UniformUncertainVariable(Variable):
 	def __reset_element(self):
 		self.element = 0.5*(self.upper + self.lower)
 	
-	def _get_strings(self):
+	def _get_strings(self) -> typing.Dict:
 		propdict = {
 			"descriptors" : f'"{self.key}"',
 			"lower_bounds": f' {self.lower} ',
 			"upper_bounds": f' {self.upper} '
+		}
+		return propdict
+
+
+class DesignVariable(Variable):
+	"""Abstract Base Class for design variables
+
+	Parameters:
+	-----------
+	key: str
+		Unique alphanumeric name of the variable
+
+	upper: float
+		Upper limit of the design range
+
+	lower: float
+		Lower limit of the design range
+
+	"""
+	def __init__(self, key: str, lower, upper, dtype: type, initial=None):
+		super().__init__(key, dtype=dtype)
+		self.lower = lower
+		self.upper = upper
+		if dtype == float:
+			self._element = 0.5*(upper + lower)
+		elif dtype == int:
+			self._element = int(round(0.5*(upper + lower)))
+		else:
+			# dtype must be str
+			self._element = lower
+		self._initial = None
+		if initial is None:
+			initial = self._element
+		self.initial = initial
+	
+	@property
+	def initial(self):
+		return self._initial
+	
+	@initial.setter
+	def initial(self, initial_point):
+		assert self.lower <= initial_point <= self.upper, \
+			"Initial point must be between lower and upper bounds."
+		self._initial = initial_point
+	
+	def _get_strings(self) -> typing.Dict:
+		propdict = {
+			"descriptors"  : f'"{self.key}"',
+			"lower_bounds" : f' {self.lower} ',
+			"upper_bounds" : f' {self.upper} ',
+			"initial_point": f' {self.initial} '
 		}
 		return propdict
 
