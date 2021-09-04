@@ -124,6 +124,7 @@ class NormalUncertainVariable(Variable):
 
 	"""
 	block_name = "normal_uncertain"
+	
 	def __init__(self, key: str, mean: float, std_dev: float):
 		super().__init__(key, dtype=float)
 		self.element = mean
@@ -158,6 +159,7 @@ class UniformUncertainVariable(Variable):
 
 	"""
 	block_name = "uniform_uncertain"
+	
 	def __init__(self, key: str, lower: float, upper: float):
 		super().__init__(key, dtype=float)
 		self._lower = lower
@@ -248,8 +250,125 @@ class DesignVariable(Variable):
 		return propdict
 
 
+class ContinuousDesignVariable(DesignVariable):
+	"""DAKOTA continuous_design variable with upper and lower bounds
+
+	Parameters:
+	-----------
+	key: str
+		Unique alphanumeric name of the variable
+
+	upper: float
+		Upper bound of the search space
+
+	lower: float
+		Lower bound of the search space
+
+	initial: float, optional
+		Initial value for the variable
+		[Default: median of lower, upper]
+
+	"""
+	block_name = "continuous_design"
+	
+	def __init__(self, key: str, lower: float, upper: float, initial=None):
+		super().__init__(key, lower, upper, dtype=float, initial=initial)
+
+
+class DiscreteRangeDesignVariable(DesignVariable):
+	"""DAKOTA discrete_design_range variable with upper and lower bounds
+
+	Parameters:
+	-----------
+	key: str
+		Unique alphanumeric name of the variable
+
+	upper: int
+		Upper bound of the search space
+
+	lower: int
+		Lower bound of the search space
+
+	initial: int, optional
+		Initial value for the variable
+		[Default: median of lower, upper]
+
+	"""
+	block_name = "discrete_design_range"
+	
+	def __init__(self, key: str, lower: int, upper: int, initial=None):
+		super().__init__(key, lower, upper, dtype=int, initial=initial)
+
+
+class DiscreteSetDesignVariable(DesignVariable):
+	"""DAKOTA discrete_design_set variable with a list of possible values
+
+	Parameters:
+	-----------
+	key: str
+		Unique alphanumeric name of the variable
+
+	elements: Iterable
+		List of all possible values the variable can take on
+
+	dtype: type
+		``int``, ``float``, or ``str``
+
+	initial: dtype, optional
+		Initial value for the variable
+		[Default: first value in ``elements``]
+	
+	"""
+	block_name = "discrete_design_set"
+	
+	def __init__(self, key: str, dtype: type, elements, initial=None):
+		self._elements = elements
+		self._initial = None
+		super().__init__(key, min(elements), max(elements), dtype)
+		# Discard parent class's _element. Always use first value as nominal.
+		self._element = elements[0]
+		self.initial = initial
+	
+	@property
+	def elements(self):
+		return self._elements
+	
+	@property
+	def elements_per_variable(self):
+		return len(self._elements)
+	
+	@property
+	def initial(self):
+		return self._initial
+	
+	@initial.setter
+	def initial(self, initial_point):
+		if initial_point is None:
+			self._initial = self._elements[0]
+			return
+		assert initial_point in self._elements, \
+			f"initial value {initial_point} is not in discrete set {self._elements}."
+		self._initial = initial_point
+	
+	def _get_strings(self) -> typing.Dict:
+		propdict = {
+			"descriptors": f'"{self.key}"',
+			"elements_per_variable": f' {self.elements_per_variable} '
+		}
+		if self.dtype is str:
+			propdict["elements"] = '"' + '" "'.join(self.elements) + '"'
+			propdict["initial_point"] = f'"{self.initial}"'
+		else:
+			propdict["elements"] = ' ' + ' '.join([str(e) for e in self.elements]) + ' '
+			propdict["initial_point"] = f' {self.initial} '
+		return propdict
+
+
 TYPED_VARIABLES = (
 	StateVariable,
 	NormalUncertainVariable,
 	UniformUncertainVariable,
+	ContinuousDesignVariable,
+	DiscreteRangeDesignVariable,
+	DiscreteSetDesignVariable
 )
