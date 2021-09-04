@@ -202,9 +202,12 @@ class Deck:
 		block += self._format_gradients() + self._format_hessians() + "\n"
 		return block
 
-	def get_deck(self) -> str:
+	def get_deck(self, executioner: str="") -> str:
 		"""WORK IN PROGRESS"""
 		deck_text = "# Dakota Input File"
+		deck_text += "\n# Usage:"
+		if executioner:
+			deck_text += f"\n#   {executioner}"
 		deck_text += "\n\n"
 		deck_text += self._format_method()
 		deck_text += self._format_variables()
