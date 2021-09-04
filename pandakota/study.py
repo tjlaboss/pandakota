@@ -137,6 +137,8 @@ class Study:
 		execlist = self._get_execlist(INP, OUT, first_restart)
 		text = self._deck.get_deck(
 			executioner=" ".join(execlist),
+			asynchronous=self.asynchronous,
+			concurrency=self.concurrency,
 		)
 		stat = self._execute_wait(
 			dakota_in=os.path.join(self._dakota_dir, INP),

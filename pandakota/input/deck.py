@@ -9,6 +9,7 @@ import collections
 import pandakota.input.variables as v
 from pandakota.input import derivatives as deriv
 from pandakota.input import methods
+from pandakota._version import __version__
 
 
 _TV = typing.Dict[typing.Type[v.Variable], typing.Dict[str, v.Variable]]
@@ -201,8 +202,24 @@ class Deck:
 		block += self._format_output_functions()  # TODO
 		block += self._format_gradients() + self._format_hessians() + "\n"
 		return block
+	
+	def _format_interface(self, asynchronous: bool, concurrency: int) -> str:
+		block = "interface"
+		block += f'\n\tid_interface "pandakota v{__version__}"'
+		block += "\n\tfork"
+		if asynchronous:
+			block += "\n\t\tasynchronous"
+			if concurrency:
+				block += f"\n\t\t\tevaluation_concurrency = {concurrency}"
+		block += "\n"
+		return block
 
-	def get_deck(self, executioner: str="") -> str:
+	def get_deck(
+			self,
+			executioner: str="",
+			asynchronous: bool=True,
+			concurrency: int=None,
+	) -> str:
 		"""WORK IN PROGRESS"""
 		deck_text = "# Dakota Input File"
 		deck_text += "\n# Usage:"
@@ -210,6 +227,7 @@ class Deck:
 			deck_text += f"\n#   {executioner}"
 		deck_text += "\n\n"
 		deck_text += self._format_method()
+		deck_text += self._format_interface(asynchronous, concurrency)
 		deck_text += self._format_variables()
 		deck_text += self._format_responses()
 		return deck_text
