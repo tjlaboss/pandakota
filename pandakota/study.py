@@ -8,21 +8,7 @@ import sys
 import typing
 import subprocess
 import pandakota.input
-
-
-# Default Directories
-DD_STUDY = "dakota_study"
-DD_PLOT = "plots"
-DD_CONVERGENCE = "converge"
-DD_ITERATIONS = "iters"
-# File name formats
-INP = "dak.in"
-OUT = "dak.out"
-TAB = "dak.tab"
-INP_FMT = "dak_{}.in"
-OUT_FMT = "dak_{}.out"
-TAB_FMT = "dak_{}.tab"
-RST_FMT = "Restart{}.rst"
+from pandakota import names
 
 
 class Study:
@@ -55,8 +41,8 @@ class Study:
 		self._bin_path = bin_path
 		#
 		self._workdir = "."
-		self._dakota_dir = os.path.join(self._workdir, DD_STUDY)
-		self._plot_dir = os.path.join(self._workdir, DD_PLOT)
+		self._dakota_dir = os.path.join(self._workdir, names.dd.study)
+		self._plot_dir = os.path.join(self._workdir, names.dd.plots)
 		#
 		self._last_restart = None
 	
@@ -133,15 +119,18 @@ class Study:
 	
 	def run_dakota(self):
 		"""Run the initial samples"""
-		first_restart = RST_FMT.format(0)
-		execlist = self._get_execlist(INP, OUT, first_restart)
+		execlist = self._get_execlist(
+			dak_in=names.files.inp,
+			dak_out=names.files.out,
+			dak_rst=names.fmt_files.rst.format(0)
+		)
 		text = self._deck.get_deck(
 			executioner=" ".join(execlist),
 			asynchronous=self.asynchronous,
 			concurrency=self.concurrency,
 		)
 		stat = self._execute_wait(
-			dakota_in=os.path.join(self._dakota_dir, INP),
+			dakota_in=os.path.join(self._dakota_dir, names.files.inp),
 			deck_text=text,
 			exec_list=execlist,
 		)
