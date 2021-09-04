@@ -9,6 +9,7 @@ import collections
 import pandakota.input.variables as v
 from pandakota.input import derivatives as deriv
 from pandakota.input import methods
+from pandakota.names import files
 from pandakota._version import __version__
 
 
@@ -203,15 +204,23 @@ class Deck:
 		block += self._format_gradients() + self._format_hessians() + "\n"
 		return block
 	
-	def _format_interface(self, asynchronous: bool, concurrency: int) -> str:
-		block = "interface"
+	def _format_interface(
+			self,
+			driver: str,
+			asynchronous: bool,
+			concurrency: int
+	) -> str:
+		block = 'interface'
 		block += f'\n\tid_interface "pandakota v{__version__}"'
-		block += "\n\tfork"
+		block += '\n\tfork'
 		if asynchronous:
-			block += "\n\t\tasynchronous"
+			block += '\n\t\tasynchronous'
 			if concurrency:
-				block += f"\n\t\t\tevaluation_concurrency = {concurrency}"
-		block += "\n"
+				block += f'\n\t\t\tevaluation_concurrency = {concurrency}'
+			block += f'\n\t\tanalysis_driver = "{driver}"'
+		block += f'\n\tparameters_file = {files.parameters}'
+		block += f'\n\tresults         = {files.results}'
+		block += '\n'
 		return block
 
 	def get_deck(

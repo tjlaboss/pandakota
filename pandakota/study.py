@@ -44,7 +44,11 @@ class Study:
 		self._dakota_dir = os.path.join(self._workdir, names.dd.study)
 		self._plot_dir = os.path.join(self._workdir, names.dd.plots)
 		#
-		self._last_restart = None
+		self._last_rst = None
+		self._last_inp = None
+		self._last_out = None
+		self._last_tab = None
+		self._last_df = None
 	
 	def _get_execlist(
 			self,
@@ -53,8 +57,8 @@ class Study:
 			dak_rst: str
 	) -> typing.List[str]:
 		execlist = [self._bin_path, "-i", dak_in, "-o", dak_out]
-		if self._last_restart:
-			execlist += ["-read_restart", self._last_restart]
+		if self._last_rst:
+			execlist += ["-read_restart", self._last_rst]
 		execlist += ["-write_restart", dak_rst]
 		return execlist
 	
@@ -119,10 +123,11 @@ class Study:
 	
 	def run_dakota(self):
 		"""Run the initial samples"""
+		first_restart = names.fmt_files.rst.format(0)
 		execlist = self._get_execlist(
 			dak_in=names.files.inp,
 			dak_out=names.files.out,
-			dak_rst=names.fmt_files.rst.format(0)
+			dak_rst=first_restart
 		)
 		text = self._deck.get_deck(
 			executioner=" ".join(execlist),
@@ -134,6 +139,11 @@ class Study:
 			deck_text=text,
 			exec_list=execlist,
 		)
-		pass
+		# Load results
+		self._last_rst = first_restart
+		self._last_inp = os.path.join(self._dakota_dir, names.files.inp)
+		self._last_out = os.path.join(self._dakota_dir, names.files.out)
+		self._last_tab = os.path.join(self._dakota_dir, names.files.tab)
+		self._last_df = None  # TODO: Read Tabular Results
 	
 	
