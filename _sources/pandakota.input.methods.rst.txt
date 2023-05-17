@@ -1,0 +1,7 @@
+pandakota.input.methods module
+==============================
+
+.. automodule:: pandakota.input.methods
+   :members:
+   :undoc-members:
+   :show-inheritance:

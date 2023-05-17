@@ -1,0 +1,21 @@
+pandakota.input package
+=======================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   pandakota.input.deck
+   pandakota.input.derivatives
+   pandakota.input.methods
+   pandakota.input.variables
+
+Module contents
+---------------
+
+.. automodule:: pandakota.input
+   :members:
+   :undoc-members:
+   :show-inheritance:

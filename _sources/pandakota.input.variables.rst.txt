@@ -1,0 +1,7 @@
+pandakota.input.variables module
+================================
+
+.. automodule:: pandakota.input.variables
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+pandakota.input.deck module
+===========================
+
+.. automodule:: pandakota.input.deck
+   :members:
+   :undoc-members:
+   :show-inheritance:

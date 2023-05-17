@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pandakota.input.methods module &mdash; pandakota  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pandakota
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pandakota.input.methods module</a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.ColinyCobylaOptimize"><code class="docutils literal notranslate"><span class="pre">ColinyCobylaOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.ColinyCobylaOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">ColinyCobylaOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.ColinyCobylaOptimize.to_string"><code class="docutils literal notranslate"><span class="pre">ColinyCobylaOptimize.to_string()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize"><code class="docutils literal notranslate"><span class="pre">JegaOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.check_convergence_type"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.check_convergence_type()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.check_crossover_type"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.check_crossover_type()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.check_initialization_type"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.check_initialization_type()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.check_mutation_type"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.check_mutation_type()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.check_replacement_type"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.check_replacement_type()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.convergence_types"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.convergence_types</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.crossover_types"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.crossover_types</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.initialization_types"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.initialization_types</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.mutation_types"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.mutation_types</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.population_size"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.population_size</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.replacement_types"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.replacement_types</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.seed"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.seed</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.to_string"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.to_string()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.JegaOptimize.type_rate_pairs"><code class="docutils literal notranslate"><span class="pre">JegaOptimize.type_rate_pairs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.LatinHypercubeSampling"><code class="docutils literal notranslate"><span class="pre">LatinHypercubeSampling</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.LatinHypercubeSampling.add_refinement"><code class="docutils literal notranslate"><span class="pre">LatinHypercubeSampling.add_refinement()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.LatinHypercubeSampling.sample_type"><code class="docutils literal notranslate"><span class="pre">LatinHypercubeSampling.sample_type</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.Method"><code class="docutils literal notranslate"><span class="pre">Method</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.Method.add_refinement"><code class="docutils literal notranslate"><span class="pre">Method.add_refinement()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Method.refinements"><code class="docutils literal notranslate"><span class="pre">Method.refinements</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Method.requires_gradients"><code class="docutils literal notranslate"><span class="pre">Method.requires_gradients</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Method.requires_hessians"><code class="docutils literal notranslate"><span class="pre">Method.requires_hessians</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Method.to_string"><code class="docutils literal notranslate"><span class="pre">Method.to_string()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.MogaOptimize"><code class="docutils literal notranslate"><span class="pre">MogaOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.MogaOptimize.convergence_types"><code class="docutils literal notranslate"><span class="pre">MogaOptimize.convergence_types</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.MogaOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">MogaOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.MogaOptimize.replacement_types"><code class="docutils literal notranslate"><span class="pre">MogaOptimize.replacement_types</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.MonteCarloSampling"><code class="docutils literal notranslate"><span class="pre">MonteCarloSampling</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.MonteCarloSampling.sample_type"><code class="docutils literal notranslate"><span class="pre">MonteCarloSampling.sample_type</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.NcsuDirectOptimize"><code class="docutils literal notranslate"><span class="pre">NcsuDirectOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.NcsuDirectOptimize.min_boxsize_limit"><code class="docutils literal notranslate"><span class="pre">NcsuDirectOptimize.min_boxsize_limit</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.NcsuDirectOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">NcsuDirectOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.NcsuDirectOptimize.solution_target"><code class="docutils literal notranslate"><span class="pre">NcsuDirectOptimize.solution_target</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.NcsuDirectOptimize.to_string"><code class="docutils literal notranslate"><span class="pre">NcsuDirectOptimize.to_string()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.NcsuDirectOptimize.volume_boxsize_limit"><code class="docutils literal notranslate"><span class="pre">NcsuDirectOptimize.volume_boxsize_limit</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.NlpqlSqpOptimize"><code class="docutils literal notranslate"><span class="pre">NlpqlSqpOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.NlpqlSqpOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">NlpqlSqpOptimize.optimize_type</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.Optimize"><code class="docutils literal notranslate"><span class="pre">Optimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.Optimize.convergence_tolerance"><code class="docutils literal notranslate"><span class="pre">Optimize.convergence_tolerance</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Optimize.function_key"><code class="docutils literal notranslate"><span class="pre">Optimize.function_key</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Optimize.max_function_evaluations"><code class="docutils literal notranslate"><span class="pre">Optimize.max_function_evaluations</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Optimize.max_iterations"><code class="docutils literal notranslate"><span class="pre">Optimize.max_iterations</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Optimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">Optimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Optimize.to_string"><code class="docutils literal notranslate"><span class="pre">Optimize.to_string()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppCgOptimize"><code class="docutils literal notranslate"><span class="pre">OptppCgOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppCgOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">OptppCgOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppCgOptimize.requires_gradients"><code class="docutils literal notranslate"><span class="pre">OptppCgOptimize.requires_gradients</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppFdNewtonOptimize"><code class="docutils literal notranslate"><span class="pre">OptppFdNewtonOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppFdNewtonOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">OptppFdNewtonOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppFdNewtonOptimize.requires_gradients"><code class="docutils literal notranslate"><span class="pre">OptppFdNewtonOptimize.requires_gradients</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppFdNewtonOptimize.requires_hessians"><code class="docutils literal notranslate"><span class="pre">OptppFdNewtonOptimize.requires_hessians</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppGNewtonOptimize"><code class="docutils literal notranslate"><span class="pre">OptppGNewtonOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppGNewtonOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">OptppGNewtonOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppGNewtonOptimize.requires_gradients"><code class="docutils literal notranslate"><span class="pre">OptppGNewtonOptimize.requires_gradients</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppGNewtonOptimize.requires_hessians"><code class="docutils literal notranslate"><span class="pre">OptppGNewtonOptimize.requires_hessians</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize"><code class="docutils literal notranslate"><span class="pre">OptppNewtonOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize.check_search_method"><code class="docutils literal notranslate"><span class="pre">OptppNewtonOptimize.check_search_method()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">OptppNewtonOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize.requires_gradients"><code class="docutils literal notranslate"><span class="pre">OptppNewtonOptimize.requires_gradients</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize.requires_hessians"><code class="docutils literal notranslate"><span class="pre">OptppNewtonOptimize.requires_hessians</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize.search_methods"><code class="docutils literal notranslate"><span class="pre">OptppNewtonOptimize.search_methods</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize.to_string"><code class="docutils literal notranslate"><span class="pre">OptppNewtonOptimize.to_string()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppOptimize"><code class="docutils literal notranslate"><span class="pre">OptppOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppOptimize.check_merit_function"><code class="docutils literal notranslate"><span class="pre">OptppOptimize.check_merit_function()</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppOptimize.merit_functions"><code class="docutils literal notranslate"><span class="pre">OptppOptimize.merit_functions</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">OptppOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppOptimize.to_string"><code class="docutils literal notranslate"><span class="pre">OptppOptimize.to_string()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppPdsOptimize"><code class="docutils literal notranslate"><span class="pre">OptppPdsOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppPdsOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">OptppPdsOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppPdsOptimize.to_string"><code class="docutils literal notranslate"><span class="pre">OptppPdsOptimize.to_string()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppQNewtonOptimize"><code class="docutils literal notranslate"><span class="pre">OptppQNewtonOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppQNewtonOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">OptppQNewtonOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppQNewtonOptimize.requires_gradients"><code class="docutils literal notranslate"><span class="pre">OptppQNewtonOptimize.requires_gradients</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.OptppQNewtonOptimize.requires_hessians"><code class="docutils literal notranslate"><span class="pre">OptppQNewtonOptimize.requires_hessians</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.Sampling"><code class="docutils literal notranslate"><span class="pre">Sampling</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.Sampling.function_key"><code class="docutils literal notranslate"><span class="pre">Sampling.function_key</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Sampling.nsamples"><code class="docutils literal notranslate"><span class="pre">Sampling.nsamples</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Sampling.sample_type"><code class="docutils literal notranslate"><span class="pre">Sampling.sample_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.Sampling.to_string"><code class="docutils literal notranslate"><span class="pre">Sampling.to_string()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pandakota.input.methods.SogaOptimize"><code class="docutils literal notranslate"><span class="pre">SogaOptimize</span></code></a><ul>
+<li><a class="reference internal" href="#pandakota.input.methods.SogaOptimize.convergence_types"><code class="docutils literal notranslate"><span class="pre">SogaOptimize.convergence_types</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.SogaOptimize.optimize_type"><code class="docutils literal notranslate"><span class="pre">SogaOptimize.optimize_type</span></code></a></li>
+<li><a class="reference internal" href="#pandakota.input.methods.SogaOptimize.replacement_types"><code class="docutils literal notranslate"><span class="pre">SogaOptimize.replacement_types</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pandakota</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pandakota.input.methods module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pandakota.input.methods.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pandakota.input.methods">
+<span id="pandakota-input-methods-module"></span><h1>pandakota.input.methods module<a class="headerlink" href="#module-pandakota.input.methods" title="Permalink to this heading"></a></h1>
+<p>Methods</p>
+<p>DAKOTA Methods</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.ColinyCobylaOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">ColinyCobylaOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_function_evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution_target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.ColinyCobylaOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.Optimize" title="pandakota.input.methods.Optimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimize</span></code></a></p>
+<p>Constrained Optimization BY Linear Approximations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.ColinyCobylaOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'coliny_cobyla'</span></em><a class="headerlink" href="#pandakota.input.methods.ColinyCobylaOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.ColinyCobylaOptimize.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pandakota.input.methods.ColinyCobylaOptimize.to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">JegaOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_function_evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">population_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossover_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossover_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_offspring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flat_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.JegaOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.Optimize" title="pandakota.input.methods.Optimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimize</span></code></a></p>
+<p>Abstract Base Class for JEGA methods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>population_size</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+<dt><strong>seed</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_convergence_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_crossover_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_initialization_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_mutation_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_replacement_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.check_convergence_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_convergence_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.check_convergence_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.check_crossover_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_crossover_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.check_crossover_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.check_initialization_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_initialization_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">it</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flat_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.check_initialization_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.check_mutation_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_mutation_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.check_mutation_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.check_replacement_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_replacement_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.check_replacement_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.convergence_types">
+<span class="sig-name descname"><span class="pre">convergence_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.convergence_types" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.crossover_types">
+<span class="sig-name descname"><span class="pre">crossover_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'multi_point_binary',</span> <span class="pre">'multi_point_parameterized_binary',</span> <span class="pre">'multi_point_real',</span> <span class="pre">'shuffle_random'}</span></em><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.crossover_types" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.initialization_types">
+<span class="sig-name descname"><span class="pre">initialization_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'flat_file',</span> <span class="pre">'simple_random',</span> <span class="pre">'unique_random'}</span></em><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.initialization_types" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.mutation_types">
+<span class="sig-name descname"><span class="pre">mutation_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'bit_random',</span> <span class="pre">'offset_cauchy',</span> <span class="pre">'offset_normal',</span> <span class="pre">'offset_uniform',</span> <span class="pre">'replace_uniform'}</span></em><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.mutation_types" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&quot;jega</span>&#160; <span class="pre">#</span> <span class="pre">TODO:</span> <span class="pre">Change</span> <span class="pre">to</span> <span class="pre">'soga'</span> <span class="pre">or</span> <span class="pre">'moga'.&quot;</span></em><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.population_size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">population_size</span></span><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.population_size" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.replacement_types">
+<span class="sig-name descname"><span class="pre">replacement_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'elitist',</span> <span class="pre">'roulette_wheel',</span> <span class="pre">'unique_roulette_wheel'}</span></em><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.replacement_types" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.seed">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seed</span></span><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.seed" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.JegaOptimize.type_rate_pairs">
+<span class="sig-name descname"><span class="pre">type_rate_pairs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'crossover_type':</span> <span class="pre">'crossover_rate',</span> <span class="pre">'mutation_type':</span> <span class="pre">'mutation_rate'}</span></em><a class="headerlink" href="#pandakota.input.methods.JegaOptimize.type_rate_pairs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.LatinHypercubeSampling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">LatinHypercubeSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsamples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.LatinHypercubeSampling" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.Sampling" title="pandakota.input.methods.Sampling"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampling</span></code></a></p>
+<p>LHS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>nsamples</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.LatinHypercubeSampling.add_refinement">
+<span class="sig-name descname"><span class="pre">add_refinement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refinement_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.LatinHypercubeSampling.add_refinement" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.LatinHypercubeSampling.sample_type">
+<span class="sig-name descname"><span class="pre">sample_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lhs'</span></em><a class="headerlink" href="#pandakota.input.methods.LatinHypercubeSampling.sample_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.Method">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">Method</span></span><a class="headerlink" href="#pandakota.input.methods.Method" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract Base Class for all methods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.Method.add_refinement">
+<span class="sig-name descname"><span class="pre">add_refinement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refinement_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.Method.add_refinement" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.Method.refinements">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">refinements</span></span><a class="headerlink" href="#pandakota.input.methods.Method.refinements" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.Method.requires_gradients">
+<span class="sig-name descname"><span class="pre">requires_gradients</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pandakota.input.methods.Method.requires_gradients" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.Method.requires_hessians">
+<span class="sig-name descname"><span class="pre">requires_hessians</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pandakota.input.methods.Method.requires_hessians" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.Method.to_string">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pandakota.input.methods.Method.to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.MogaOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">MogaOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niching_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postprocessor_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.MogaOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.JegaOptimize" title="pandakota.input.methods.JegaOptimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">JegaOptimize</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>population_size</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+<dt><strong>seed</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_convergence_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_crossover_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_initialization_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_mutation_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_replacement_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.MogaOptimize.convergence_types">
+<span class="sig-name descname"><span class="pre">convergence_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'metric_tracker',</span> <span class="pre">'num_generations',</span> <span class="pre">'percent_change'}</span></em><a class="headerlink" href="#pandakota.input.methods.MogaOptimize.convergence_types" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.MogaOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'moga'</span></em><a class="headerlink" href="#pandakota.input.methods.MogaOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.MogaOptimize.replacement_types">
+<span class="sig-name descname"><span class="pre">replacement_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'below_limit',</span> <span class="pre">'elitist',</span> <span class="pre">'roulette_wheel',</span> <span class="pre">'unique_roulette_wheel'}</span></em><a class="headerlink" href="#pandakota.input.methods.MogaOptimize.replacement_types" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.MonteCarloSampling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">MonteCarloSampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsamples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.MonteCarloSampling" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.Sampling" title="pandakota.input.methods.Sampling"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampling</span></code></a></p>
+<p>Random sampling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>nsamples</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.MonteCarloSampling.sample_type">
+<span class="sig-name descname"><span class="pre">sample_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'random'</span></em><a class="headerlink" href="#pandakota.input.methods.MonteCarloSampling.sample_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.NcsuDirectOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">NcsuDirectOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_function_evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solution_target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_boxsize_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_boxsize_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.NcsuDirectOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.Optimize" title="pandakota.input.methods.Optimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimize</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>min_boxsize_limit</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+<dt><strong>solution_target</strong></dt><dd></dd>
+<dt><strong>volume_boxsize_limit</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.NcsuDirectOptimize.min_boxsize_limit">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">min_boxsize_limit</span></span><a class="headerlink" href="#pandakota.input.methods.NcsuDirectOptimize.min_boxsize_limit" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.NcsuDirectOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ncsu_direct'</span></em><a class="headerlink" href="#pandakota.input.methods.NcsuDirectOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.NcsuDirectOptimize.solution_target">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">solution_target</span></span><a class="headerlink" href="#pandakota.input.methods.NcsuDirectOptimize.solution_target" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.NcsuDirectOptimize.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pandakota.input.methods.NcsuDirectOptimize.to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.NcsuDirectOptimize.volume_boxsize_limit">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume_boxsize_limit</span></span><a class="headerlink" href="#pandakota.input.methods.NcsuDirectOptimize.volume_boxsize_limit" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.NlpqlSqpOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">NlpqlSqpOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_function_evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.NlpqlSqpOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.Optimize" title="pandakota.input.methods.Optimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimize</span></code></a></p>
+<p>NLPQL Sequential Quadratic Program</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.NlpqlSqpOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'nlpql_sqp'</span></em><a class="headerlink" href="#pandakota.input.methods.NlpqlSqpOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.Optimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">Optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_function_evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.Optimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.Method" title="pandakota.input.methods.Method"><code class="xref py py-class docutils literal notranslate"><span class="pre">Method</span></code></a></p>
+<p>Abstract Base Class for all optimization methods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>optimize_type</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.Optimize.convergence_tolerance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convergence_tolerance</span></span><a class="headerlink" href="#pandakota.input.methods.Optimize.convergence_tolerance" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.Optimize.function_key">
+<span class="sig-name descname"><span class="pre">function_key</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'objective_functions'</span></em><a class="headerlink" href="#pandakota.input.methods.Optimize.function_key" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.Optimize.max_function_evaluations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_function_evaluations</span></span><a class="headerlink" href="#pandakota.input.methods.Optimize.max_function_evaluations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.Optimize.max_iterations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_iterations</span></span><a class="headerlink" href="#pandakota.input.methods.Optimize.max_iterations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.Optimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pandakota.input.methods.Optimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.Optimize.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pandakota.input.methods.Optimize.to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppCgOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">OptppCgOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_function_evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gradient_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speculative</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.OptppCgOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.OptppOptimize" title="pandakota.input.methods.OptppOptimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptppOptimize</span></code></a></p>
+<p>Conjugate gradient optimization</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_merit_function</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppCgOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'optpp_cg'</span></em><a class="headerlink" href="#pandakota.input.methods.OptppCgOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppCgOptimize.requires_gradients">
+<span class="sig-name descname"><span class="pre">requires_gradients</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pandakota.input.methods.OptppCgOptimize.requires_gradients" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppFdNewtonOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">OptppFdNewtonOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centering_parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steplength_to_boundary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.OptppFdNewtonOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize" title="pandakota.input.methods.OptppNewtonOptimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptppNewtonOptimize</span></code></a></p>
+<p>Finite Difference Newton optimization method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_merit_function</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_search_method</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppFdNewtonOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'optpp_fd_newton'</span></em><a class="headerlink" href="#pandakota.input.methods.OptppFdNewtonOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppFdNewtonOptimize.requires_gradients">
+<span class="sig-name descname"><span class="pre">requires_gradients</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pandakota.input.methods.OptppFdNewtonOptimize.requires_gradients" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppFdNewtonOptimize.requires_hessians">
+<span class="sig-name descname"><span class="pre">requires_hessians</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pandakota.input.methods.OptppFdNewtonOptimize.requires_hessians" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppGNewtonOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">OptppGNewtonOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centering_parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steplength_to_boundary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.OptppGNewtonOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize" title="pandakota.input.methods.OptppNewtonOptimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptppNewtonOptimize</span></code></a></p>
+<p>Newton optimization method based on least-squares calibration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_merit_function</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_search_method</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppGNewtonOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'optpp_g_newton'</span></em><a class="headerlink" href="#pandakota.input.methods.OptppGNewtonOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppGNewtonOptimize.requires_gradients">
+<span class="sig-name descname"><span class="pre">requires_gradients</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pandakota.input.methods.OptppGNewtonOptimize.requires_gradients" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppGNewtonOptimize.requires_hessians">
+<span class="sig-name descname"><span class="pre">requires_hessians</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pandakota.input.methods.OptppGNewtonOptimize.requires_hessians" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppNewtonOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">OptppNewtonOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centering_parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steplength_to_boundary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.OptppNewtonOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.OptppOptimize" title="pandakota.input.methods.OptppOptimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptppOptimize</span></code></a></p>
+<p>The optpp_newton method, and base class for other Opt++ Newton methods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_merit_function</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_search_method</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppNewtonOptimize.check_search_method">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_search_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.OptppNewtonOptimize.check_search_method" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppNewtonOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'optpp_newton'</span></em><a class="headerlink" href="#pandakota.input.methods.OptppNewtonOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppNewtonOptimize.requires_gradients">
+<span class="sig-name descname"><span class="pre">requires_gradients</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pandakota.input.methods.OptppNewtonOptimize.requires_gradients" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppNewtonOptimize.requires_hessians">
+<span class="sig-name descname"><span class="pre">requires_hessians</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pandakota.input.methods.OptppNewtonOptimize.requires_hessians" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppNewtonOptimize.search_methods">
+<span class="sig-name descname"><span class="pre">search_methods</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'gradient_based_line_search',</span> <span class="pre">'tr_pds',</span> <span class="pre">'trust_region',</span> <span class="pre">'value_based_line_search'}</span></em><a class="headerlink" href="#pandakota.input.methods.OptppNewtonOptimize.search_methods" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppNewtonOptimize.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pandakota.input.methods.OptppNewtonOptimize.to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">OptppOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_function_evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gradient_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speculative</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merit_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.OptppOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.Optimize" title="pandakota.input.methods.Optimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimize</span></code></a></p>
+<p>Abstract Base Class for Opt++ family of local optimizers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_merit_function</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppOptimize.check_merit_function">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_merit_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.OptppOptimize.check_merit_function" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppOptimize.merit_functions">
+<span class="sig-name descname"><span class="pre">merit_functions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'argaez_tapia',</span> <span class="pre">'el_bakry',</span> <span class="pre">'van_shanno'}</span></em><a class="headerlink" href="#pandakota.input.methods.OptppOptimize.merit_functions" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'optpp</span>&#160; <span class="pre">#</span> <span class="pre">TODO:</span> <span class="pre">change</span> <span class="pre">to</span> <span class="pre">one</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">optpp_*</span> <span class="pre">methods'</span></em><a class="headerlink" href="#pandakota.input.methods.OptppOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppOptimize.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pandakota.input.methods.OptppOptimize.to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppPdsOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">OptppPdsOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_function_evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_scheme_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.OptppPdsOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.OptppOptimize" title="pandakota.input.methods.OptppOptimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptppOptimize</span></code></a></p>
+<p>Simplex-based derivative-free optimization</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_merit_function</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppPdsOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'optpp_pds'</span></em><a class="headerlink" href="#pandakota.input.methods.OptppPdsOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppPdsOptimize.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pandakota.input.methods.OptppPdsOptimize.to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppQNewtonOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">OptppQNewtonOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centering_parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steplength_to_boundary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.OptppQNewtonOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.OptppNewtonOptimize" title="pandakota.input.methods.OptppNewtonOptimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptppNewtonOptimize</span></code></a></p>
+<p>Quasi-Newton optimization method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_merit_function</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_search_method</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppQNewtonOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'optpp_q_newton'</span></em><a class="headerlink" href="#pandakota.input.methods.OptppQNewtonOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppQNewtonOptimize.requires_gradients">
+<span class="sig-name descname"><span class="pre">requires_gradients</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pandakota.input.methods.OptppQNewtonOptimize.requires_gradients" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.OptppQNewtonOptimize.requires_hessians">
+<span class="sig-name descname"><span class="pre">requires_hessians</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pandakota.input.methods.OptppQNewtonOptimize.requires_hessians" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.Sampling">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">Sampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nsamples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.Sampling" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.Method" title="pandakota.input.methods.Method"><code class="xref py py-class docutils literal notranslate"><span class="pre">Method</span></code></a></p>
+<p>Abstract Base Class for all sampling methods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>nsamples</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+<dt><strong>sample_type</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.Sampling.function_key">
+<span class="sig-name descname"><span class="pre">function_key</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'response_functions'</span></em><a class="headerlink" href="#pandakota.input.methods.Sampling.function_key" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandakota.input.methods.Sampling.nsamples">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nsamples</span></span><a class="headerlink" href="#pandakota.input.methods.Sampling.nsamples" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.Sampling.sample_type">
+<span class="sig-name descname"><span class="pre">sample_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pandakota.input.methods.Sampling.sample_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandakota.input.methods.Sampling.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pandakota.input.methods.Sampling.to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandakota.input.methods.SogaOptimize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandakota.input.methods.</span></span><span class="sig-name descname"><span class="pre">SogaOptimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_function_evaluations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">population_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convergence_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossover_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossover_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mutation_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_offspring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flat_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandakota.input.methods.SogaOptimize" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pandakota.input.methods.JegaOptimize" title="pandakota.input.methods.JegaOptimize"><code class="xref py py-class docutils literal notranslate"><span class="pre">JegaOptimize</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>convergence_tolerance</strong></dt><dd></dd>
+<dt><strong>max_function_evaluations</strong></dt><dd></dd>
+<dt><strong>max_iterations</strong></dt><dd></dd>
+<dt><strong>population_size</strong></dt><dd></dd>
+<dt><strong>refinements</strong></dt><dd></dd>
+<dt><strong>seed</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>add_refinement</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_convergence_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_crossover_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_initialization_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>check_mutation_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>check_replacement_type</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>to_string</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.SogaOptimize.convergence_types">
+<span class="sig-name descname"><span class="pre">convergence_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'average_fitness_tracker',</span> <span class="pre">'best_fitness_tracker'}</span></em><a class="headerlink" href="#pandakota.input.methods.SogaOptimize.convergence_types" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.SogaOptimize.optimize_type">
+<span class="sig-name descname"><span class="pre">optimize_type</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'soga'</span></em><a class="headerlink" href="#pandakota.input.methods.SogaOptimize.optimize_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandakota.input.methods.SogaOptimize.replacement_types">
+<span class="sig-name descname"><span class="pre">replacement_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'elitist',</span> <span class="pre">'favor_feasible',</span> <span class="pre">'roulette_wheel',</span> <span class="pre">'unique_roulette_wheel'}</span></em><a class="headerlink" href="#pandakota.input.methods.SogaOptimize.replacement_types" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, tjlaboss.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

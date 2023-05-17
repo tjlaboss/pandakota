@@ -1,0 +1,7 @@
+pandakota.input.derivatives module
+==================================
+
+.. automodule:: pandakota.input.derivatives
+   :members:
+   :undoc-members:
+   :show-inheritance:
