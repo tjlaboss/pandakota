@@ -1,0 +1,7 @@
+pandakota.study module
+======================
+
+.. automodule:: pandakota.study
+   :members:
+   :undoc-members:
+   :show-inheritance:

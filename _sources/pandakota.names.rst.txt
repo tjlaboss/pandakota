@@ -1,0 +1,7 @@
+pandakota.names module
+======================
+
+.. automodule:: pandakota.names
+   :members:
+   :undoc-members:
+   :show-inheritance:

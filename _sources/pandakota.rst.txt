@@ -10,6 +10,15 @@ Subpackages
    pandakota.input
    pandakota.reader
 
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   pandakota.names
+   pandakota.study
+
 Module contents
 ---------------
 
