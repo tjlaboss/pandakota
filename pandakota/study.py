@@ -196,8 +196,14 @@ class Study:
 			dak_out=names.files.out,
 			dak_rst=first_restart
 		)
+		driver_script = pandakota.driver.get_driver_sh(self._dakota_dir)
+		driver_fpath = os.path.join(self._dakota_dir, names.files.driver)
+		with open(driver_fpath, 'w') as fd:
+			fd.write(driver_script)
+		os.chmod(driver_fpath, mode=0o770)
 		text = self._deck.get_deck(
 			executioner=" ".join(execlist),
+			driver_path=driver_fpath,
 			asynchronous=self.asynchronous,
 			concurrency=self.concurrency,
 		)

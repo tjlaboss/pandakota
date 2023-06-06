@@ -225,6 +225,7 @@ class Deck:
 
 	def get_deck(
 			self,
+			driver_path: str,
 			executioner: str="",
 			asynchronous: bool=True,
 			concurrency: int=None,
@@ -236,7 +237,7 @@ class Deck:
 			deck_text += f"\n#   {executioner}"
 		deck_text += "\n\n"
 		deck_text += self._format_method()
-		deck_text += self._format_interface("# driver goes here", asynchronous, concurrency)
+		deck_text += self._format_interface(driver_path, asynchronous, concurrency)
 		deck_text += self._format_variables()
 		deck_text += self._format_responses()
 		return deck_text
