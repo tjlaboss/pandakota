@@ -1,0 +1,7 @@
+pandakota.driver.template module
+================================
+
+.. automodule:: pandakota.driver.template
+   :members:
+   :undoc-members:
+   :show-inheritance:

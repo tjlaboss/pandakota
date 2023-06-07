@@ -1,0 +1,19 @@
+pandakota.driver package
+========================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   pandakota.driver.driver
+   pandakota.driver.template
+
+Module contents
+---------------
+
+.. automodule:: pandakota.driver
+   :members:
+   :undoc-members:
+   :show-inheritance:
